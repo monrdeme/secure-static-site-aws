@@ -2,8 +2,8 @@ name: Deploy Website Files
 
 on:
   push:
-  paths:
-    - "website/**"
+    paths:
+      - "website/**"
 
 jobs:
   deploy:
