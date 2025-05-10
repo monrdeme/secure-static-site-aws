@@ -1,5 +1,3 @@
-# Defines reusable variables for the terraform configuration
-
 variable "project" {
   default = "secure-static-site-aws"
 }
