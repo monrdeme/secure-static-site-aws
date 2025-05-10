@@ -1,390 +1,203 @@
-# AWS Secure Static Website
-
-This project demonstrates how to host a secure static website on AWS S3, emphasizing permissions, automation, and monitoring. The infrastructure is provisioned using Terraform, and Python scripts are utilized for automation tasks.
-
----
-
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/cfc5dbcf-3fcb-4a71-9c13-2a49f8bab3e6">
-
-# Technologies Utilized
-- Terraform: Infrastructure as Code (IaC) tool to provision AWS resources.
-- Python: Script to automate file uploads and permission checks.
-- Github Actions: CI/CD
-- AWS Services: S3, IAM, CloudTrail, GuardDuty, EventBridge, SNS
+# Secure Static Website on AWS with Terraform and Python
+This project demonstrates how to deploy and secure a static website hosted on Amazon S3 using Infrastructure as Code (Terraform) and Python scripting for automation. The goal is to follow AWS security best practices around permissions, monitoring, and alerting, while keeping it accessible and scalable.
 
 ---
 
-# Prerequisites
-- AWS account
-- AWS CLI configured
-- Terraform installed
-- Git installed
-- Python 3.x installed with boto3
+## Architecture
+
+![Architecture Diagram](./assets/architecture.png) <!-- Replace with actual path or hosted link -->
 
 ---
 
-# Table of Contents
+## Technologies Utilized
 
-- [Vulnerability Management Policy Draft Creation](#vulnerability-management-policy-draft-creation)
-- [Mock Meeting: Policy Buy-In (Stakeholders)](#step-2-mock-meeting-policy-buy-in-stakeholders)
-- [Policy Finalization and Senior Leadership Sign-Off](#step-3-policy-finalization-and-senior-leadership-sign-off)
-- [Mock Meeting: Initial Scan Permission (Server Team)](#step-4-mock-meeting-initial-scan-permission-server-team)
-- [Initial Scan of Server Team Assets](#step-5-initial-scan-of-server-team-assets)
-- [Vulnerability Assessment and Prioritization](#step-6-vulnerability-assessment-and-prioritization)
-- [Distributing Remediations to Remediation Teams](#step-7-distributing-remediations-to-remediation-teams)
-- [Mock Meeting: Post-Initial Discovery Scan (Server Team)](#step-8-mock-meeting-post-initial-discovery-scan-server-team)
-- [Mock CAB Meeting: Implementing Remediations](#step-9-mock-cab-meeting-implementing-remediations)
-- [Remediation Round 1: Outdated Wireshark Removal](#remediation-round-1-outdated-wireshark-removal)
-- [Remediation Round 2: Insecure Protocols & Ciphers](#remediation-round-2-insecure-protocols--ciphers)
-- [Remediation Round 3: Guest Account Group Membership](#remediation-round-3-guest-account-group-membership)
-- [Remediation Round 4: Windows OS Updates](#remediation-round-4-windows-os-updates)
-- [First Cycle Remediation Effort Summary](#first-cycle-remediation-effort-summary)
+- **AWS S3** – Host the static website and store CloudTrail logs
+- **AWS DynamoDB** – Maintains Terraform state locks to prevent concurrent infrastructure changes
+- **AWS IAM** – Secure role-based access control with least-privilege permissions
+- **AWS CloudTrail** – Monitor and record account activity
+- **AWS GuardDuty** – Detect and alert on threats
+- **Amazon EventBridge** – Route specific findings and events
+- **Amazon SNS** – Send real-time security alerts to email
+- **Terraform** – Provision all infrastructure as code
+- **Python + boto3** – Automate S3 uploads and validate permissions
+- **GitHub Actions** – Automate deployments and updates to S3
+- **Git** – Track all changes in version control
 
 ---
 
-### Clone the repository
+## Prerequisites
 
-This phase focuses on drafting a Vulnerability Management Policy as a starting point for stakeholder engagement. The initial draft outlines scope, responsibilities, and remediation timelines, and may be adjusted based on feedback from relevant departments to ensure practical implementation before final approval by upper management.  
-[Draft Policy](https://docs.google.com/document/d/1CLSWm1_9JL1oUqgyNNwtPXW6FzXJ7ddVnSAUQTyqC8I/edit?usp=drive_link)
+Before you begin, ensure you have the following:
 
----
-
-### Step 2) Mock Meeting: Policy Buy-In (Stakeholders)
-
-In this phase, a meeting with the server team introduces the draft Vulnerability Management Policy and assesses their capability to meet remediation timelines. Feedback leads to adjustments, like extending the critical remediation window from 48 hours to one week, ensuring collaborative implementation.
-
-<a href='https://youtu.be/8g6uafc6LjE' target="_"><img width="600" alt="image" src="https://github.com/user-attachments/assets/549d21f4-26c2-412d-9117-d7b6835aedbf"></a>
-
-[YouTube Video: Stakeholder Policy Buy-In Meeting](https://youtu.be/8g6uafc6LjE)
+- **AWS Account** with administrative access
+- **Verified Email Address** in AWS (for SNS subscriptions)
+- **Terraform installed** (v1.3+ recommended)
+- **Python 3.8+** with `boto3` installed
+- **Git installed**
+- **GitHub Repository** set up and linked locally
+- **AWS CLI configured** locally (`aws configure`)
+- **IAM User/Role** with necessary permissions to provision AWS resources and upload to S3
 
 ---
 
-### Step 3) Policy Finalization and Senior Leadership Sign-Off
+## Table of Contents
 
-After gathering feedback from the server team, the policy is revised, addressing aggressive remediation timelines. With final approval from upper management, the policy now guides the program, ensuring compliance and reference for pushback resolution.  
-[Finalized Policy](https://docs.google.com/document/d/1rvueLX_71pOR8ldN9zVW9r_zLzDQxVsnSUtNar8ftdg/edit?usp=drive_link)
-<div style="text-align: center;">
-    <img src="https://github.com/user-attachments/assets/9afcdbc1-0493-4af2-9287-1cb9b8f59b40" alt="image" width="400">
-</div>
-
----
-
-### Step 4) Mock Meeting: Initial Scan Permission (Server Team)
-
-The team collaborates with the server team to initiate scheduled credential scans. A compromise is reached to scan a single server first, monitoring resource impact, and using just-in-time Active Directory credentials for secure, controlled access.  
-[Mock Meeting Video](https://youtu.be/lg068WA4SKM)
-
-<a href='https://youtu.be/8g6uafc6LjE' target="_"><img width="600" alt="image" src="https://github.com/user-attachments/assets/31fe8d0f-636b-475b-8d5a-a2795c183f86"></a>
-
-[YouTube Video: Stakeholder Policy Buy-In Meeting](https://youtu.be/8g6uafc6LjE)
+1. [Deployment Workflow](#project-overview)
+    - [Step 1: Create Static Website Files](#step-0-create-static-website-files)
+    - [Step 2: Configure Terraform Remote State](#configure-terraform-remote-state)
+    - [Step 3: Configure S3 Buckets](#step-1-configure-s3-buckets)
+    - [Step 4: Configure IAM Roles](#step-2-configure-iam-roles)
+    - [Step 5: Enable CloudTrail and Logging](#step-3-enable-cloudtrail-and-logging)
+    - [Step 6: Enable GuardDuty](#step-4-enable-guardduty)
+    - [Step 7: Create EventBridge Rules](#step-5-create-eventbridge-rules)
+    - [Step 8: Configure SNS Notifications](#step-6-configure-sns-notifications)
+    - [Step 9: Automate Upload with Python Script](#step-7-automate-upload-with-python-script)
+    - [Step 10: Setup GitHub Actions CI/CD](#step-8-setup-github-actions-cicd)
+6. [Screenshots](#screenshots)
+7. [Security Best Practices Implemented](#security-best-practices-implemented)
+8. [Conclusion](#conclusion)
 
 ---
 
-### Step 5) Initial Scan of Server Team Assets
+## Deployment Workflow
 
-In this phase, an insecure Windows Server is provisioned to simulate the server team's environment. After creating vulnerabilities, an authenticated scan is performed, and the results are exported for future remediation steps.  
+### Step 1 (Setup): Manually Create S3 Bucket for Terraform State and DynamoDB Lock Table 
 
-<img width="635" alt="image" src="https://github.com/user-attachments/assets/937cccbd-36bb-4445-97b9-e915085cda81" style="border: 2px solid black;">
+**Purpose**: 
+- Before using Terraform to provision your infrastructure, configure remote state management. This ensures your Terraform state is stored securely and allows for state locking.
+- Terraform uses a state file to track resources. To collaborate securely or avoid accidental state corruption, we store this file in an S3 bucket and lock it using a DynamoDB table.
 
-[Scan 1 - Initial Scan](https://drive.google.com/file/d/1RBPVj_azKJMwmRZ8QILlb4hxIjQU3wQ7/view?usp=drive_link)
+#### A. Create S3 Bucket for Terraform State
+- Go to the **AWS Console > S3**
+- Click **Create bucket**
+- Name the bucket (e.g. `secure-static-site-tfstate`)
+- Block all public access
+- Enable **Versioning** (important for rollback)
+- Leave the rest as default, and create the bucket
 
+#### B. Create DynamoDB Table for State Locking
+- Go to the **AWS Console > DynamoDB**
+- Click **Create table**
+- **Table name**: `terraform-locks`
+- **Partition key**: `LockID` (Type: String)
+- Leave all other settings as default
+- Create the table
 
+#### C. Update `backend.tf`
+In your Terraform project, update or create `backend.tf`:
 
-
----
-
-### Step 6) Vulnerability Assessment and Prioritization
-
-We assessed vulnerabilities and established a remediation prioritization strategy based on ease of remediation and impact. The following priorities were set:
-
-1. Third Party Software Removal (Wireshark)
-2. Windows OS Secure Configuration (Protocols & Ciphers)
-3. Windows OS Secure Configuration (Guest Account Group Membership)
-4. Windows OS Updates
-
----
-
-### Step 7) Distributing Remediations to Remediation Teams
-
-The server team received remediation scripts and scan reports to address key vulnerabilities. This streamlined their efforts and prepared them for a follow-up review.  
-
-<img width="635" alt="image" src="https://github.com/user-attachments/assets/bbf9478f-e1d1-4898-846e-b510ec8c6f72">
-
-[Remediation Email](https://github.com/joshmadakor1/lognpacific-public/blob/main/misc/remediation-email.md)
+[→ View `backend.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/backend.tf)
 
 ---
 
-### Step 8) Mock Meeting: Post-Initial Discovery Scan (Server Team)
+### Step 2: Configure S3 Buckets (`s3.tf`)
 
-The server team reviewed vulnerability scan results, identifying outdated software, insecure accounts, and deprecated protocols. The remediation packages were prepared for submission to the Change Control Board (CAB). 
+**Purpose**:
+- One bucket for hosting the static site
+- One logging bucket for CloudTrail
 
-<a href="https://youtu.be/0tjjFewxSNw" target="_"><img width="600" src="https://github.com/user-attachments/assets/f18b23ef-9cce-4eca-9468-ca03540a8820"/></a>
+**Security Features**:
+- Bucket versioning enabled
+- Public ACLs blocked
+- Website bucket policy allows *read-only* access to HTML files
+- Logging bucket denies all public access
 
-[Meeting Video](https://youtu.be/0tjjFewxSNw)
+**Screenshots to Include**:
+- Public access settings
+- Bucket policy viewer
+- Static website hosting tab
 
----
-
-### Step 9) Mock CAB Meeting: Implementing Remediations
-
-The Change Control Board (CAB) reviewed and approved the plan to remove insecure protocols and cipher suites. The plan included a rollback script and a tiered deployment approach.  
-
-<a href="https://youtu.be/0tjjFewxSNw" target="_"><img width="600" src="https://github.com/user-attachments/assets/a4f5799e-9579-4c59-a607-948b3bbe4f3d"/></a>
-
-[Meeting Video](https://youtu.be/zOFPkTa9kY8)
-
----
-### Step 10 ) Remediation Effort
-
-**Remediation Round 1: Outdated Wireshark Removal**
-
-The server team used a PowerShell script to remove outdated Wireshark. A follow-up scan confirmed successful remediation.  
-[Wireshark Removal Script](https://github.com/joshmadakor1/lognpacific-public/blob/main/automation/remediation-wireshark-uninstall.ps1)  
-
-<img width="634" alt="image" src="https://github.com/user-attachments/assets/7b4f9ab2-d230-4458-ac0f-c0ff070ae79a">
-
-[Scan 2 - Third Party Software Removal](https://drive.google.com/file/d/1UiwPPTtuSZKk02hiMyXf31pXUIeC5EWt/view?usp=drive_link)
-
-
-**Remediation Round 2: Insecure Protocols & Ciphers**
-
-The server team used PowerShell scripts to remediate insecure protocols and cipher suites. A follow-up scan verified successful remediation, and the results were saved for reference.  
-[PowerShell: Insecure Protocols Remediation](https://github.com/joshmadakor1/lognpacific-public/blob/main/automation/toggle-protocols.ps1)
-[PowerShell: Insecure Ciphers Remediation](https://github.com/joshmadakor1/lognpacific-public/blob/main/automation/toggle-cipher-suites.ps1)
-
-<img width="630" alt="image" src="https://github.com/user-attachments/assets/0e96120d-8ec9-4f76-8e42-79c752200010">
-
-[Scan 3 - Ciphersuites and Protocols](https://drive.google.com/file/d/1Qc6-ezQvwReCGUZNtnva0kCZo_-zW-Sm/view?usp=drive_link)
-
-
-**Remediation Round 3: Guest Account Group Membership**
-
-The server team removed the guest account from the administrator group. A new scan confirmed remediation, and the results were exported for comparison.  
-[PowerShell: Guest Account Group Membership Remediation](https://github.com/joshmadakor1/lognpacific-public/blob/main/automation/toggle-guest-local-administrators.ps1)  
-
-<img width="627" alt="image" src="https://github.com/user-attachments/assets/870a3eac-3398-44fe-91c0-96f3c2578df4">
-
-[Scan 4 - Guest Account Group Removal](https://drive.google.com/file/d/1jVgikjfrV1YjOcL3QRT_oUB0Y82w22V7/view?usp=drive_link)
-
-
-**Remediation Round 4: Windows OS Updates**
-
-Windows updates were re-enabled and applied until the system was fully up to date. A final scan verified the changes  
-
-<img width="627" alt="image" src="https://github.com/user-attachments/assets/870a3eac-3398-44fe-91c0-96f3c2578df4">
-
-[Scan 5 - Post Windows Updates](https://drive.google.com/file/d/1tmDjeHl5uiGitRwWy8kFRi33q-nGi1Zt/view?usp=drive_link)
+[→ View `s3.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/s3.tf)
 
 ---
 
-### First Cycle Remediation Effort Summary
+### Step 3: Create IAM Roles (`iam.tf`)
 
-The remediation process reduced total vulnerabilities by 80%, from 30 to 6. Critical vulnerabilities were resolved by the second scan (100%), and high vulnerabilities dropped by 90%. Mediums were reduced by 76%. In an actual production environment, asset criticality would further guide future remediation efforts.  
+**Purpose**:
+- Admin role: Full control
+- Deployment role: Upload site content
+- Website role: Read-only access to site
 
-<img width="1920" alt="image" src="https://github.com/user-attachments/assets/51f0aae8-7f36-4d90-b29f-5257e57155f9">
+**Security Features**:
+- Scoped actions (`s3:PutObject`, `s3:GetObject`, etc.)
+- Defined assume-role trust policies
 
-[Remediation Data](https://docs.google.com/spreadsheets/d/1FTtFfZYmFsNLU6pm8nTzsKyKE-d2ftXzX_DPwcnFNfA/edit?gid=0#gid=0)
+**Screenshots to Include**:
+- IAM Roles page
+- Trust relationships
+- Attached policies
 
----
-
-### On-going Vulnerability Management (Maintenance Mode)
-
-After completing the initial remediation cycle, the vulnerability management program transitions into **Maintenance Mode**. This phase ensures that vulnerabilities continue to be managed proactively, keeping systems secure over time. Regular scans, continuous monitoring, and timely remediation are crucial components of this phase. (See [Finalized Policy](https://docs.google.com/document/d/1rvueLX_71pOR8ldN9zVW9r_zLzDQxVsnSUtNar8ftdg/edit?usp=drive_link) for scanning and remediation cadence requirements.)
-
-Key activities in Maintenance Mode include:
-- **Scheduled Vulnerability Scans**: Perform regular scans (e.g., weekly or monthly) to detect new vulnerabilities as systems evolve.
-- **Patch Management**: Continuously apply security patches and updates, ensuring no critical vulnerabilities remain unpatched.
-- **Remediation Follow-ups**: Address newly identified vulnerabilities promptly, prioritizing based on risk and impact.
-- **Policy Review and Updates**: Periodically review the Vulnerability Management Policy to ensure it aligns with the latest security best practices and organizational needs.
-- **Audit and Compliance**: Conduct internal audits to ensure compliance with the vulnerability management policy and external regulations.
-- **Ongoing Communication with Stakeholders**: Maintain open communication with teams responsible for remediation, ensuring efficient coordination.
-
-By maintaining an active vulnerability management process, organizations can stay ahead of emerging threats and ensure long-term security resilience.
+[→ View `iam.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/iam.tf)
 
 ---
 
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/cfc5dbcf-3fcb-4a71-9c13-2a49f8bab3e6">
+### Step 4: Enable CloudTrail (`cloudtrail.tf`)
 
-# Technology Utilized
-- Tenable (enterprise vulnerability management platform)
-- Azure Virtual Machines (Nessus scan engine + scan targets)
-- PowerShell & BASH (remediation scripts)
+**Purpose**:
+- Log all management events across the account
+- Send logs to the S3 logging bucket
 
----
+**Screenshots to Include**:
+- CloudTrail config page
+- Event selector (Management events only)
+- S3 log bucket config
 
-
-# Table of Contents
-
-- [Vulnerability Management Policy Draft Creation](#vulnerability-management-policy-draft-creation)
-- [Mock Meeting: Policy Buy-In (Stakeholders)](#step-2-mock-meeting-policy-buy-in-stakeholders)
-- [Policy Finalization and Senior Leadership Sign-Off](#step-3-policy-finalization-and-senior-leadership-sign-off)
-- [Mock Meeting: Initial Scan Permission (Server Team)](#step-4-mock-meeting-initial-scan-permission-server-team)
-- [Initial Scan of Server Team Assets](#step-5-initial-scan-of-server-team-assets)
-- [Vulnerability Assessment and Prioritization](#step-6-vulnerability-assessment-and-prioritization)
-- [Distributing Remediations to Remediation Teams](#step-7-distributing-remediations-to-remediation-teams)
-- [Mock Meeting: Post-Initial Discovery Scan (Server Team)](#step-8-mock-meeting-post-initial-discovery-scan-server-team)
-- [Mock CAB Meeting: Implementing Remediations](#step-9-mock-cab-meeting-implementing-remediations)
-- [Remediation Round 1: Outdated Wireshark Removal](#remediation-round-1-outdated-wireshark-removal)
-- [Remediation Round 2: Insecure Protocols & Ciphers](#remediation-round-2-insecure-protocols--ciphers)
-- [Remediation Round 3: Guest Account Group Membership](#remediation-round-3-guest-account-group-membership)
-- [Remediation Round 4: Windows OS Updates](#remediation-round-4-windows-os-updates)
-- [First Cycle Remediation Effort Summary](#first-cycle-remediation-effort-summary)
+[→ View `cloudtrail.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/cloudtrail.tf)
 
 ---
 
-### Vulnerability Management Policy Draft Creation
+### Step 5: Enable GuardDuty (`guardduty.tf`)
 
-This phase focuses on drafting a Vulnerability Management Policy as a starting point for stakeholder engagement. The initial draft outlines scope, responsibilities, and remediation timelines, and may be adjusted based on feedback from relevant departments to ensure practical implementation before final approval by upper management.  
-[Draft Policy](https://docs.google.com/document/d/1CLSWm1_9JL1oUqgyNNwtPXW6FzXJ7ddVnSAUQTyqC8I/edit?usp=drive_link)
+**Purpose**:
+- Detect threats like port scanning, compromised credentials, or unusual activity
 
----
+**Screenshots to Include**:
+- GuardDuty console
+- Sample findings
+- Detector configuration
 
-### Step 2) Mock Meeting: Policy Buy-In (Stakeholders)
-
-In this phase, a meeting with the server team introduces the draft Vulnerability Management Policy and assesses their capability to meet remediation timelines. Feedback leads to adjustments, like extending the critical remediation window from 48 hours to one week, ensuring collaborative implementation.
-
-<a href='https://youtu.be/8g6uafc6LjE' target="_"><img width="600" alt="image" src="https://github.com/user-attachments/assets/549d21f4-26c2-412d-9117-d7b6835aedbf"></a>
-
-[YouTube Video: Stakeholder Policy Buy-In Meeting](https://youtu.be/8g6uafc6LjE)
+[→ View `guardduty.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/guardduty.tf)
 
 ---
 
-### Step 3) Policy Finalization and Senior Leadership Sign-Off
+### Step 6: Configure EventBridge Rules (`eventbridge.tf`)
 
-After gathering feedback from the server team, the policy is revised, addressing aggressive remediation timelines. With final approval from upper management, the policy now guides the program, ensuring compliance and reference for pushback resolution.  
-[Finalized Policy](https://docs.google.com/document/d/1rvueLX_71pOR8ldN9zVW9r_zLzDQxVsnSUtNar8ftdg/edit?usp=drive_link)
-<div style="text-align: center;">
-    <img src="https://github.com/user-attachments/assets/9afcdbc1-0493-4af2-9287-1cb9b8f59b40" alt="image" width="400">
-</div>
+**Purpose**:
+- Forward:
+  - CloudTrail abnormal API activity
+  - High/Critical GuardDuty findings
 
----
+**Screenshots to Include**:
+- Event pattern config
+- Target SNS topic
+- Matched event preview
 
-### Step 4) Mock Meeting: Initial Scan Permission (Server Team)
-
-The team collaborates with the server team to initiate scheduled credential scans. A compromise is reached to scan a single server first, monitoring resource impact, and using just-in-time Active Directory credentials for secure, controlled access.  
-[Mock Meeting Video](https://youtu.be/lg068WA4SKM)
-
-<a href='https://youtu.be/8g6uafc6LjE' target="_"><img width="600" alt="image" src="https://github.com/user-attachments/assets/31fe8d0f-636b-475b-8d5a-a2795c183f86"></a>
-
-[YouTube Video: Stakeholder Policy Buy-In Meeting](https://youtu.be/8g6uafc6LjE)
+[→ View `eventbridge.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/eventbridge.tf)
 
 ---
 
-### Step 5) Initial Scan of Server Team Assets
+### Step 7: Create Notification System with SNS (`sns.tf`)
 
-In this phase, an insecure Windows Server is provisioned to simulate the server team's environment. After creating vulnerabilities, an authenticated scan is performed, and the results are exported for future remediation steps.  
+**Purpose**:
+- Send security alerts via email
 
-<img width="635" alt="image" src="https://github.com/user-attachments/assets/937cccbd-36bb-4445-97b9-e915085cda81" style="border: 2px solid black;">
+**Setup**:
+- Two SNS topics: one for CloudTrail, one for GuardDuty
+- Your email subscribed for alerts
 
-[Scan 1 - Initial Scan](https://drive.google.com/file/d/1RBPVj_azKJMwmRZ8QILlb4hxIjQU3wQ7/view?usp=drive_link)
+**Screenshots to Include**:
+- SNS topics and subscriptions
+- Example email received
 
-
-
-
----
-
-### Step 6) Vulnerability Assessment and Prioritization
-
-We assessed vulnerabilities and established a remediation prioritization strategy based on ease of remediation and impact. The following priorities were set:
-
-1. Third Party Software Removal (Wireshark)
-2. Windows OS Secure Configuration (Protocols & Ciphers)
-3. Windows OS Secure Configuration (Guest Account Group Membership)
-4. Windows OS Updates
+[→ View `sns.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/sns.tf)
 
 ---
 
-### Step 7) Distributing Remediations to Remediation Teams
+### Step 8: Automate File Uploads (`upload_files.py`)
 
-The server team received remediation scripts and scan reports to address key vulnerabilities. This streamlined their efforts and prepared them for a follow-up review.  
+**Purpose**:
+- Upload all static website files in `./website/` to S3 with correct metadata (like `Content-Type`)
 
-<img width="635" alt="image" src="https://github.com/user-attachments/assets/bbf9478f-e1d1-4898-846e-b510ec8c6f72">
-
-[Remediation Email](https://github.com/joshmadakor1/lognpacific-public/blob/main/misc/remediation-email.md)
-
----
-
-### Step 8) Mock Meeting: Post-Initial Discovery Scan (Server Team)
-
-The server team reviewed vulnerability scan results, identifying outdated software, insecure accounts, and deprecated protocols. The remediation packages were prepared for submission to the Change Control Board (CAB). 
-
-<a href="https://youtu.be/0tjjFewxSNw" target="_"><img width="600" src="https://github.com/user-attachments/assets/f18b23ef-9cce-4eca-9468-ca03540a8820"/></a>
-
-[Meeting Video](https://youtu.be/0tjjFewxSNw)
-
----
-
-### Step 9) Mock CAB Meeting: Implementing Remediations
-
-The Change Control Board (CAB) reviewed and approved the plan to remove insecure protocols and cipher suites. The plan included a rollback script and a tiered deployment approach.  
-
-<a href="https://youtu.be/0tjjFewxSNw" target="_"><img width="600" src="https://github.com/user-attachments/assets/a4f5799e-9579-4c59-a607-948b3bbe4f3d"/></a>
-
-[Meeting Video](https://youtu.be/zOFPkTa9kY8)
-
----
-### Step 10 ) Remediation Effort
-
-**Remediation Round 1: Outdated Wireshark Removal**
-
-The server team used a PowerShell script to remove outdated Wireshark. A follow-up scan confirmed successful remediation.  
-[Wireshark Removal Script](https://github.com/joshmadakor1/lognpacific-public/blob/main/automation/remediation-wireshark-uninstall.ps1)  
-
-<img width="634" alt="image" src="https://github.com/user-attachments/assets/7b4f9ab2-d230-4458-ac0f-c0ff070ae79a">
-
-[Scan 2 - Third Party Software Removal](https://drive.google.com/file/d/1UiwPPTtuSZKk02hiMyXf31pXUIeC5EWt/view?usp=drive_link)
-
-
-**Remediation Round 2: Insecure Protocols & Ciphers**
-
-The server team used PowerShell scripts to remediate insecure protocols and cipher suites. A follow-up scan verified successful remediation, and the results were saved for reference.  
-[PowerShell: Insecure Protocols Remediation](https://github.com/joshmadakor1/lognpacific-public/blob/main/automation/toggle-protocols.ps1)
-[PowerShell: Insecure Ciphers Remediation](https://github.com/joshmadakor1/lognpacific-public/blob/main/automation/toggle-cipher-suites.ps1)
-
-<img width="630" alt="image" src="https://github.com/user-attachments/assets/0e96120d-8ec9-4f76-8e42-79c752200010">
-
-[Scan 3 - Ciphersuites and Protocols](https://drive.google.com/file/d/1Qc6-ezQvwReCGUZNtnva0kCZo_-zW-Sm/view?usp=drive_link)
-
-
-**Remediation Round 3: Guest Account Group Membership**
-
-The server team removed the guest account from the administrator group. A new scan confirmed remediation, and the results were exported for comparison.  
-[PowerShell: Guest Account Group Membership Remediation](https://github.com/joshmadakor1/lognpacific-public/blob/main/automation/toggle-guest-local-administrators.ps1)  
-
-<img width="627" alt="image" src="https://github.com/user-attachments/assets/870a3eac-3398-44fe-91c0-96f3c2578df4">
-
-[Scan 4 - Guest Account Group Removal](https://drive.google.com/file/d/1jVgikjfrV1YjOcL3QRT_oUB0Y82w22V7/view?usp=drive_link)
-
-
-**Remediation Round 4: Windows OS Updates**
-
-Windows updates were re-enabled and applied until the system was fully up to date. A final scan verified the changes  
-
-<img width="627" alt="image" src="https://github.com/user-attachments/assets/870a3eac-3398-44fe-91c0-96f3c2578df4">
-
-[Scan 5 - Post Windows Updates](https://drive.google.com/file/d/1tmDjeHl5uiGitRwWy8kFRi33q-nGi1Zt/view?usp=drive_link)
-
----
-
-### First Cycle Remediation Effort Summary
-
-The remediation process reduced total vulnerabilities by 80%, from 30 to 6. Critical vulnerabilities were resolved by the second scan (100%), and high vulnerabilities dropped by 90%. Mediums were reduced by 76%. In an actual production environment, asset criticality would further guide future remediation efforts.  
-
-<img width="1920" alt="image" src="https://github.com/user-attachments/assets/51f0aae8-7f36-4d90-b29f-5257e57155f9">
-
-[Remediation Data](https://docs.google.com/spreadsheets/d/1FTtFfZYmFsNLU6pm8nTzsKyKE-d2ftXzX_DPwcnFNfA/edit?gid=0#gid=0)
-
----
-
-### On-going Vulnerability Management (Maintenance Mode)
-
-After completing the initial remediation cycle, the vulnerability management program transitions into **Maintenance Mode**. This phase ensures that vulnerabilities continue to be managed proactively, keeping systems secure over time. Regular scans, continuous monitoring, and timely remediation are crucial components of this phase. (See [Finalized Policy](https://docs.google.com/document/d/1rvueLX_71pOR8ldN9zVW9r_zLzDQxVsnSUtNar8ftdg/edit?usp=drive_link) for scanning and remediation cadence requirements.)
-
-Key activities in Maintenance Mode include:
-- **Scheduled Vulnerability Scans**: Perform regular scans (e.g., weekly or monthly) to detect new vulnerabilities as systems evolve.
-- **Patch Management**: Continuously apply security patches and updates, ensuring no critical vulnerabilities remain unpatched.
-- **Remediation Follow-ups**: Address newly identified vulnerabilities promptly, prioritizing based on risk and impact.
-- **Policy Review and Updates**: Periodically review the Vulnerability Management Policy to ensure it aligns with the latest security best practices and organizational needs.
-- **Audit and Compliance**: Conduct internal audits to ensure compliance with the vulnerability management policy and external regulations.
-- **Ongoing Communication with Stakeholders**: Maintain open communication with teams responsible for remediation, ensuring efficient coordination.
-
-By maintaining an active vulnerability management process, organizations can stay ahead of emerging threats and ensure long-term security resilience.
+**Command**:
+```bash
+python3 scripts/upload_files.py
