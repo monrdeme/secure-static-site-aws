@@ -44,16 +44,17 @@ Before you begin, ensure you have the following:
 ## Table of Contents
 
 1. [Deployment Workflow](#project-overview)
-    - [Step 1: Create Static Website Files](#step-0-create-static-website-files)
-    - [Step 2: Configure Terraform Remote State](#configure-terraform-remote-state)
-    - [Step 3: Configure S3 Buckets](#step-1-configure-s3-buckets)
-    - [Step 4: Configure IAM Roles](#step-2-configure-iam-roles)
-    - [Step 5: Enable CloudTrail and Logging](#step-3-enable-cloudtrail-and-logging)
-    - [Step 6: Enable GuardDuty](#step-4-enable-guardduty)
-    - [Step 7: Create EventBridge Rules](#step-5-create-eventbridge-rules)
-    - [Step 8: Configure SNS Notifications](#step-6-configure-sns-notifications)
-    - [Step 9: Automate Upload with Python Script](#step-7-automate-upload-with-python-script)
-    - [Step 10: Setup GitHub Actions CI/CD](#step-8-setup-github-actions-cicd)
+    - [Step 1: Create Static Website Files](#step-1-create-static-website-files)
+    - [Step 2: Configure Terraform Remote State](#step-2-configure-terraform-remote-state)
+    - [Step 3: Configure Terraform Variables](#step-3-configure-terraform-variables)
+    - [Step 4: Configure S3 Buckets](#step-4-configure-s3-buckets)
+    - [Step 5: Configure IAM Roles](#step-5-configure-iam-roles)
+    - [Step 6: Enable CloudTrail and Logging](#step-6-enable-cloudtrail-and-logging)
+    - [Step 7: Enable GuardDuty](#step-7-enable-guardduty)
+    - [Step 8: Create EventBridge Rules](#step-8-create-eventbridge-rules)
+    - [Step 9: Configure SNS Notifications](#step-9-configure-sns-notifications)
+    - [Step 10: Automate Upload with Python Script](#step-10-automate-upload-with-python-script)
+    - [Step 11: Setup GitHub Actions CI/CD](#step-11-setup-github-actions-cicd)
 6. [Screenshots](#screenshots)
 7. [Security Best Practices Implemented](#security-best-practices-implemented)
 8. [Conclusion](#conclusion)
@@ -88,6 +89,17 @@ Before you begin, ensure you have the following:
 In your Terraform project, update or create `backend.tf`:
 
 [→ View `backend.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/backend.tf)
+
+---
+
+### Step 3: Configure Terraform Variables (`variables.tf`)
+
+**Purpose**:
+- Centralize configuration values such as S3 bucket names, region, and resource names
+- Enable reuse across multiple Terraform files
+- Keep infrastructure code DRY (Don’t Repeat Yourself)
+
+[→ View `variables.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/variables.tf)
 
 ---
 
