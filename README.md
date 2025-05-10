@@ -11,17 +11,18 @@ This project demonstrates how to deploy and secure a static website hosted on Am
 
 ## Technologies Utilized
 
-- **AWS S3** – Host the static website and store CloudTrail logs
-- **AWS DynamoDB** – Maintains Terraform state locks to prevent concurrent infrastructure changes
-- **AWS IAM** – Secure role-based access control with least-privilege permissions
-- **AWS CloudTrail** – Monitor and record account activity
-- **AWS GuardDuty** – Detect and alert on threats
-- **Amazon EventBridge** – Route specific findings and events
-- **Amazon SNS** – Send real-time security alerts to email
-- **Terraform** – Provision all infrastructure as code
-- **Python + boto3** – Automate S3 uploads and validate permissions
-- **GitHub Actions** – Automate deployments and updates to S3
-- **Git** – Track all changes in version control
+- **Terraform** – Infrastructure as Code to provision AWS resources
+- **Python (Boto3)** – Automate file uploads and S3 permission checks
+- **Amazon S3** – Host static website and store CloudTrail logs
+- **AWS IAM** – Secure role-based access control with least-privilege permissions to resources
+- **AWS CloudTrail** – Log and monitor API activity
+- **Amazon GuardDuty** – Threat detection and continuous security monitoring
+- **Amazon EventBridge** – Trigger actions based on CloudTrail and GuardDuty findings
+- **Amazon CloudWatch** – Underlying log and event visibility
+- **Amazon SNS** – Email notifications for security alerts
+- **Amazon DynamoDB** – Store Terraform state locks for safe collaboration
+- **GitHub Actions** – CI/CD pipeline for automatic deployments to AWS
+- **Git/Github** – Version control and source code hosting
 
 ---
 
@@ -64,8 +65,8 @@ Before you begin, ensure you have the following:
 ### Step 1 (Setup): Manually Create S3 Bucket for Terraform State and DynamoDB Lock Table 
 
 **Purpose**: 
-- Before using Terraform to provision your infrastructure, configure remote state management. This ensures your Terraform state is stored securely and allows for state locking.
-- Terraform uses a state file to track resources. To collaborate securely or avoid accidental state corruption, we store this file in an S3 bucket and lock it using a DynamoDB table.
+- Store Terraform state files remotely
+- Enable state locking to prevent concurrent modifications.
 
 #### A. Create S3 Bucket for Terraform State
 - Go to the **AWS Console > S3**
@@ -160,7 +161,7 @@ In your Terraform project, update or create `backend.tf`:
 
 ---
 
-### Step 6: Configure EventBridge Rules (`eventbridge.tf`)
+### Step 6: Configure EventBridge Rules (`cloudwatch.tf`)
 
 **Purpose**:
 - Forward:
@@ -172,7 +173,7 @@ In your Terraform project, update or create `backend.tf`:
 - Target SNS topic
 - Matched event preview
 
-[→ View `eventbridge.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/eventbridge.tf)
+[→ View `cloudwatch.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/cloudwatch.tf)
 
 ---
 
