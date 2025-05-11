@@ -63,13 +63,22 @@ Before you begin, ensure you have the following:
 
 ## Deployment Workflow
 
-### Step 1: Create Static Website Files (`index.html`, `error.html`)
+### Step 1: Create Static Website Files (`website/`)
 
 **Purpose**:
--  Provide the content for the static website
+- Provide the public-facing content for the static website hosted on S3.
 
-[index.html](https://github.com/monrdeme/secure-static-site-aws/blob/main/website/index.html)  
-[error.html](https://github.com/monrdeme/secure-static-site-aws/blob/main/website/error.html)  
+**Security Measures**:
+- Files do not contain dynamic scripts or sensitive information.
+- HTML is validated to prevent injection or malformed rendering.
+- Public read access is limited to these specific static files via bucket policy.
+
+**Implementation Details**:
+- `index.html`: Landing page of the site.
+- `error.html`: Custom error page for 403/404 responses.
+
+[website/](https://github.com/monrdeme/secure-static-site-aws/tree/main/website)
+ 
 
 ---
 
