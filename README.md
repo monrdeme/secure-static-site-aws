@@ -45,16 +45,16 @@ Before you begin, ensure you have the following:
 
 1. [Deployment Workflow](#project-overview)
     - [Step 1: Create Static Website Files](#step-1-create-static-website-files)
-    - [Step 2: Configure Terraform Remote State](#step-2-configure-terraform-remote-state)
+    - [Step 2: Configure Terraform Remote State](#step-2-configure-terraform-remote)
     - [Step 3: Configure Terraform Variables](#step-3-configure-terraform-variables)
     - [Step 4: Configure S3 Buckets](#step-4-configure-s3-buckets)
     - [Step 5: Configure IAM Roles](#step-5-configure-iam-roles)
     - [Step 6: Enable CloudTrail and Logging](#step-6-enable-cloudtrail-and-logging)
     - [Step 7: Enable GuardDuty](#step-7-enable-guardduty)
-    - [Step 8: Create EventBridge Rules](#step-8-create-eventbridge-rules)
+    - [Step 8: Configure Cloudwatch Log Group and EventBridge Ruless](#step-8-configure-cloudwatch-log-group-and-eventbridge-rules)
     - [Step 9: Configure SNS Notifications](#step-9-configure-sns-notifications)
-    - [Step 10: Automate Upload with Python Script](#step-10-automate-upload-with-python-script)
-    - [Step 11: Setup GitHub Actions CI/CD](#step-11-setup-github-actions-cicd)
+    - [Step 10: Automate File Uploads](#step-10-automate-file-uploads)
+    - [Step 11: Configure GitHub Actions CI/CD](#step-11-configure-github-actions-cicd)
 6. [Screenshots](#screenshots)
 7. [Security Best Practices Implemented](#security-best-practices-implemented)
 8. [Conclusion](#conclusion)
@@ -63,11 +63,24 @@ Before you begin, ensure you have the following:
 
 ## Deployment Workflow
 
-### Step 1 (Setup): Manually Create S3 Bucket for Terraform State and DynamoDB Lock Table 
+### Step 1: Create Static Website Files (`index.html`, `error.html`)
+
+**Purpose**:
+-  Provide the content for the static website
+
+[index.html](https://github.com/monrdeme/secure-static-site-aws/blob/main/website/index.html)  
+[error.html](https://github.com/monrdeme/secure-static-site-aws/blob/main/website/error.html)  
+
+
+
+
+
+
+### Step 2: Configure Terraform Remote State
 
 **Purpose**: 
 - Store Terraform state files remotely
-- Enable state locking to prevent concurrent modifications.
+- Enable state locking to prevent concurrent modifications
 
 #### A. Create S3 Bucket for Terraform State
 - Go to the **AWS Console > S3**
@@ -103,7 +116,7 @@ In your Terraform project, update or create `backend.tf`:
 
 ---
 
-### Step 2: Configure S3 Buckets (`s3.tf`)
+### Step 4: Configure S3 Buckets (`s3.tf`)
 
 **Purpose**:
 - One bucket for hosting the static site
@@ -124,7 +137,7 @@ In your Terraform project, update or create `backend.tf`:
 
 ---
 
-### Step 3: Create IAM Roles (`iam.tf`)
+### Step 5: Configure IAM Roles (`iam.tf`)
 
 **Purpose**:
 - Admin role: Full control
@@ -144,7 +157,7 @@ In your Terraform project, update or create `backend.tf`:
 
 ---
 
-### Step 4: Enable CloudTrail (`cloudtrail.tf`)
+### Step 6: Enable CloudTrail and Logging (`cloudtrail.tf`)
 
 **Purpose**:
 - Log all management events across the account
@@ -159,7 +172,7 @@ In your Terraform project, update or create `backend.tf`:
 
 ---
 
-### Step 5: Enable GuardDuty (`guardduty.tf`)
+### Step 7: Enable GuardDuty (`guardduty.tf`)
 
 **Purpose**:
 - Detect threats like port scanning, compromised credentials, or unusual activity
@@ -173,7 +186,7 @@ In your Terraform project, update or create `backend.tf`:
 
 ---
 
-### Step 6: Configure EventBridge Rules (`cloudwatch.tf`)
+### Step 8: Configure Cloudwatch Log Group and EventBridge Rules (`cloudwatch.tf`)
 
 **Purpose**:
 - Forward:
@@ -189,7 +202,7 @@ In your Terraform project, update or create `backend.tf`:
 
 ---
 
-### Step 7: Create Notification System with SNS (`sns.tf`)
+### Step 9: Configure SNS Notifications (`sns.tf`)
 
 **Purpose**:
 - Send security alerts via email
@@ -206,11 +219,36 @@ In your Terraform project, update or create `backend.tf`:
 
 ---
 
-### Step 8: Automate File Uploads (`upload_files.py`)
+### Step 10: Automate File Uploads (`upload_files.py`)
 
 **Purpose**:
 - Upload all static website files in `./website/` to S3 with correct metadata (like `Content-Type`)
 
 **Command**:
-```bash
-python3 scripts/upload_files.py
+
+`python3 scripts/upload_files.py`
+
+---
+
+### Step 11: Configure GitHub Actions CI/CD (`deploy.yml`)
+
+**Purpose**:
+- CloudTrail abnormal API activity
+- High/Critical GuardDuty findings
+
+**Screenshots to Include**:
+- Event pattern config
+- Target SNS topic
+- Matched event preview
+
+[→ View `cloudwatch.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/cloudwatch.tf)
+
+
+
+
+
+
+
+
+
+
