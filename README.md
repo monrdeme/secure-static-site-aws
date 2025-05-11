@@ -9,7 +9,7 @@ This project demonstrates how to deploy and secure a static website hosted on Am
 
 ---
 
-## Technologies Utilized
+## Technologies Used
 
 - **Terraform** – Infrastructure as Code to provision AWS resources
 - **Python (Boto3)** – Automate file uploads and S3 permission checks
@@ -47,7 +47,7 @@ Before you begin, ensure you have the following:
     - [Step 1: Create Static Website Files](#step-1-create-static-website-files)
     - [Step 2: Configure Terraform Remote State](#step-2-configure-terraform-remote)
     - [Step 3: Configure Terraform Variables](#step-3-configure-terraform-variables)
-    - [Step 4: Configure S3 Buckets](#step-4-configure-s3-buckets)
+    - [Step 4: S3 Buckets Configuration](#step-4-configure-s3-buckets)
     - [Step 5: Configure IAM Roles](#step-5-configure-iam-roles)
     - [Step 6: Enable CloudTrail and Logging](#step-6-enable-cloudtrail-and-logging)
     - [Step 7: Enable GuardDuty](#step-7-enable-guardduty)
@@ -124,24 +124,31 @@ In your Terraform project, update or create `backend.tf`:
 
 ---
 
-### Step 4: Configure S3 Buckets (`s3.tf`)
+### Step 4: S3 Buckets Configuration (`s3.tf`)
 
 **Purpose**:
-- One bucket for hosting the static site
-- One logging bucket for CloudTrail
+- Host static website content and store logs.
 
-**Security Features**:
-- Bucket versioning enabled
-- Public ACLs blocked
-- Website bucket policy allows *read-only* access to HTML files
-- Logging bucket denies all public access
+**Security Measures**:
+- Enabled versioning and server-side encryption on all buckets.
+- Blocked public access, with exceptions for read-only access to HTML files in the website bucket.
+- Applied strict bucket policies to prevent unauthorized access.
+
+**Implementation Details**:  
+- `secure-static-site-aws` bucket:
+    - Static website hosting enabled.
+    - Configured index and error documents.
+  
+- `secure-static-site-aws-logging` bucket:
+    - Dedicated for CloudTrail logs.
+    - Public access completely blocked.
 
 **Screenshots to Include**:
 - Public access settings
 - Bucket policy viewer
 - Static website hosting tab
 
-[→ View `s3.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/s3.tf)
+[s3.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/s3.tf)
 
 ---
 
