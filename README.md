@@ -47,8 +47,8 @@ Before you begin, ensure you have the following:
     - [Step 1: Create Static Website Files](#step-1-create-static-website-files)
     - [Step 2: Configure Terraform Remote State](#step-2-configure-terraform-remote)
     - [Step 3: Configure Terraform Variables](#step-3-configure-terraform-variables)
-    - [Step 4: S3 Buckets Configuration](#step-4-configure-s3-buckets)
-    - [Step 5: Configure IAM Roles](#step-5-configure-iam-roles)
+    - [Step 4: S3 Buckets Configuration](#step-4-s3-buckets-configuration)
+    - [Step 5: IAM Roles and Policies](#step-iam-roles-and-policies)
     - [Step 6: Enable CloudTrail and Logging](#step-6-enable-cloudtrail-and-logging)
     - [Step 7: Enable GuardDuty](#step-7-enable-guardduty)
     - [Step 8: Configure Cloudwatch Log Group and EventBridge Ruless](#step-8-configure-cloudwatch-log-group-and-eventbridge-rules)
@@ -152,23 +152,22 @@ In your Terraform project, update or create `backend.tf`:
 
 ---
 
-### Step 5: Configure IAM Roles (`iam.tf`)
+### Step 5: IAM Roles and Policies (`iam.tf`)
 
 **Purpose**:
-- Admin role: Full control
-- Deployment role: Upload site content
-- Website role: Read-only access to site
+- Define roles and permissions for resource access.
 
-**Security Features**:
-- Scoped actions (`s3:PutObject`, `s3:GetObject`, etc.)
-- Defined assume-role trust policies
+**Security Measures**:
+- Created roles with the principle of least privilege.
+- Implemented trust policies for controlled role assumption.
+- Scoped inline policies to specific actions and resources.
 
 **Screenshots to Include**:
 - IAM Roles page
 - Trust relationships
 - Attached policies
 
-[→ View `iam.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/iam.tf)
+[iam.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/iam.tf)
 
 ---
 
