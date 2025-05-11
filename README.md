@@ -49,7 +49,7 @@ Before you begin, ensure you have the following:
     - [Step 3: Configure Terraform Variables](#step-3-configure-terraform-variables)
     - [Step 4: S3 Buckets Configuration](#step-4-s3-buckets-configuration)
     - [Step 5: IAM Roles and Policies](#step-iam-roles-and-policies)
-    - [Step 6: Enable CloudTrail and Logging](#step-6-enable-cloudtrail-and-logging)
+    - [Step 6: CloudTrail Configuration](#step-6-cloudtrail-configuration)
     - [Step 7: Enable GuardDuty](#step-7-enable-guardduty)
     - [Step 8: Configure Cloudwatch Log Group and EventBridge Ruless](#step-8-configure-cloudwatch-log-group-and-eventbridge-rules)
     - [Step 9: Configure SNS Notifications](#step-9-configure-sns-notifications)
@@ -171,18 +171,26 @@ In your Terraform project, update or create `backend.tf`:
 
 ---
 
-### Step 6: Enable CloudTrail and Logging (`cloudtrail.tf`)
+### Step 6: Cloudtrail Configuration (`cloudtrail.tf`)
 
 **Purpose**:
-- Log all management events across the account
-- Send logs to the S3 logging bucket
+- Log all API activity across AWS services.
+
+**Security Measures**:
+- Configured CloudTrail to log all management events across regions.
+- Directed logs to a secure, encrypted S3 bucket with public access blocked.
+- Enforced bucket encryption and versioning.
+
+- **Implementation Details**:
+- Single CloudTrail trail covering all regions.
+- CloudTrail logs stored in the `secure-static-site-aws-logging` bucket.
 
 **Screenshots to Include**:
 - CloudTrail config page
 - Event selector (Management events only)
 - S3 log bucket config
 
-[→ View `cloudtrail.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/cloudtrail.tf)
+[cloudtrail.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/cloudtrail.tf)
 
 ---
 
