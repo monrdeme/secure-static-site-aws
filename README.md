@@ -203,7 +203,7 @@ In your Terraform project, update or create `backend.tf`:
 - Directed logs to a secure, encrypted S3 bucket with public access blocked.
 - Enforced bucket encryption and versioning.
 
-- **Implementation Details**:
+**Implementation Details**:
 - Single CloudTrail trail covering all regions.
 - CloudTrail logs stored in the `secure-static-site-aws-logging` bucket.
 
