@@ -71,10 +71,7 @@ Before you begin, ensure you have the following:
 [index.html](https://github.com/monrdeme/secure-static-site-aws/blob/main/website/index.html)  
 [error.html](https://github.com/monrdeme/secure-static-site-aws/blob/main/website/error.html)  
 
-
-
-
-
+---
 
 ### Step 2: Configure Terraform Remote State
 
@@ -82,26 +79,30 @@ Before you begin, ensure you have the following:
 - Store Terraform state files remotely
 - Enable state locking to prevent concurrent modifications
 
-#### A. Create S3 Bucket for Terraform State
+#### A) Create S3 Bucket for Terraform State
 - Go to the **AWS Console > S3**
 - Click **Create bucket**
-- Name the bucket (e.g. `secure-static-site-tfstate`)
+- Name the bucket (e.g. `secure-static-site-aws-tf-state`)
 - Block all public access
 - Enable **Versioning** (important for rollback)
 - Leave the rest as default, and create the bucket
 
-#### B. Create DynamoDB Table for State Locking
+#### B) Create DynamoDB Table for State Locking
 - Go to the **AWS Console > DynamoDB**
 - Click **Create table**
-- **Table name**: `terraform-locks`
+- **Table name**: (e.g. `tf-state-lock`)
 - **Partition key**: `LockID` (Type: String)
 - Leave all other settings as default
 - Create the table
 
-#### C. Update `backend.tf`
+#### C) Update `backend.tf`
 In your Terraform project, update or create `backend.tf`:
 
-[→ View `backend.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/backend.tf)
+[backend.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/backend.tf)
+
+#### D) Initialize Terraform Backend
+`terraform init`
+
 
 ---
 
