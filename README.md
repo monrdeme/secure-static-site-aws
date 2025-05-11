@@ -79,7 +79,8 @@ Before you begin, ensure you have the following:
 - Store Terraform state files remotely
 - Enable state locking to prevent concurrent modifications
 
-#### A) Create S3 Bucket for Terraform State
+**Actions**:
+#### 1. Create S3 Bucket for Terraform State
 - Go to the **AWS Console > S3**
 - Click **Create bucket**
 - Name the bucket (e.g. `secure-static-site-aws-tf-state`)
@@ -87,7 +88,7 @@ Before you begin, ensure you have the following:
 - Enable **Versioning** (important for rollback)
 - Leave the rest as default, and create the bucket
 
-#### B) Create DynamoDB Table for State Locking
+#### 2. Create DynamoDB Table for State Locking
 - Go to the **AWS Console > DynamoDB**
 - Click **Create table**
 - **Table name**: (e.g. `tf-state-lock`)
@@ -95,14 +96,13 @@ Before you begin, ensure you have the following:
 - Leave all other settings as default
 - Create the table
 
-#### C) Update `backend.tf`
+#### 3. Update `backend.tf`
 In your Terraform project, update or create `backend.tf`:
 
 [backend.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/backend.tf)
 
-#### D) Initialize Terraform Backend
+#### 4. Initialize Terraform Backend
 `terraform init`
-
 
 ---
 
@@ -113,7 +113,14 @@ In your Terraform project, update or create `backend.tf`:
 - Enable reuse across multiple Terraform files
 - Keep infrastructure code DRY (Don’t Repeat Yourself)
 
-[→ View `variables.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/variables.tf)
+**Actions**:
+#### 1. Create or open the `variables.tf` file in the `terraform/` directory
+#### 2. Define your input variables
+- AWS resource names
+- AWS region
+- Email address
+
+[variables.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/variables.tf)
 
 ---
 
