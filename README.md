@@ -44,7 +44,7 @@ Before you begin, ensure you have the following:
 ## Table of Contents
 
 1. [Deployment Workflow](#project-overview)
-    - [Step 1: Create Static Website Files](#step-1-create-static-website-files)
+    - [Step 1: Static Website Files](#step-1-static-website-files)
     - [Step 2: Configure Terraform Remote State](#step-2-configure-terraform-remote)
     - [Step 3: Configure Terraform Variables](#step-3-configure-terraform-variables)
     - [Step 4: S3 Buckets Configuration](#step-4-s3-buckets-configuration)
@@ -63,7 +63,7 @@ Before you begin, ensure you have the following:
 
 ## Deployment Workflow
 
-### Step 1: Create Static Website Files (`website/`)
+### Step 1: Static Website Files (`website/`)
 
 **Purpose**:
 - Provide the public-facing content for the static website hosted on S3.
@@ -170,6 +170,19 @@ In your Terraform project, update or create `backend.tf`:
 - Created roles with the principle of least privilege.
 - Implemented trust policies for controlled role assumption.
 - Scoped inline policies to specific actions and resources.
+
+**Implementation Details**:
+- **Admin Role**:
+    - Full access to all project resources (used for provisioning and testing).
+    - Trusted by your IAM user or GitHub Actions via OIDC.
+- **Write-Only Role**:
+    - Scoped permissions for uploading files to the website S3 bucket.
+    - Allowed actions include s3:PutObject and s3:ListBucket.
+    - Trusted by CI/CD pipeline (e.g., GitHub Actions).
+- **Read-Only Role**:
+    - Read-only access to the website content bucket.
+    - Granted only s3:GetObject on specific paths.
+    - Intended for static content consumers (e.g., public or CloudFront).
 
 **Screenshots to Include**:
 - IAM Roles page
