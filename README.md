@@ -46,7 +46,7 @@ Before you begin, ensure you have the following:
 1. [Deployment Workflow](#project-overview)
     - [Step 1: Static Website Files](#step-1-static-website-files)
     - [Step 2: Configure Terraform Remote State](#step-2-configure-terraform-remote)
-    - [Step 3: Configure Terraform Variables](#step-3-configure-terraform-variables)
+    - [Step 3: Terraform Variables](#step-3-terraform-variables)
     - [Step 4: S3 Buckets Configuration](#step-4-s3-buckets-configuration)
     - [Step 5: IAM Roles and Policies](#step-iam-roles-and-policies)
     - [Step 6: CloudTrail Configuration](#step-6-cloudtrail-configuration)
@@ -115,19 +115,22 @@ In your Terraform project, update or create `backend.tf`:
 
 ---
 
-### Step 3: Configure Terraform Variables (`variables.tf`)
+### Step 3: Terraform Variables (`variables.tf`)
 
 **Purpose**:
-- Centralize configuration values such as S3 bucket names, region, and resource names
-- Enable reuse across multiple Terraform files
-- Keep infrastructure code DRY (Don’t Repeat Yourself)
+- Centralize and manage configuration values across your Terraform modules.
 
-**Actions**:
-#### 1. Create or open the `variables.tf` file in the `terraform/` directory
-#### 2. Define your input variables
-- AWS resource names
-- AWS region
-- Email address
+**Security Measures**:
+- Keeps secrets (e.g., email addresses) in a single location for easier management and review.
+- Avoids hardcoding sensitive or environment-specific values directly in resource blocks.
+- Simplifies reuse and promotes DRY (Don’t Repeat Yourself) principles.
+
+**Implementation Details**:
+- Defines key variables such as:
+    - AWS region
+    - S3 bucket names
+    - IAM role names
+    - Email address for SNS alerts
 
 [variables.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/variables.tf)
 
