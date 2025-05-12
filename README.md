@@ -103,6 +103,9 @@ Before you begin, ensure you have the following:
 
 [backend.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/backend.tf)
 
+<img width="1212" alt="image" src="https://github.com/user-attachments/assets/977d3916-1ef8-4b31-bec6-0bd9a3bf7b1d">
+
+
 ---
 
 ### Step 3: Terraform Variables (`variables.tf`)
