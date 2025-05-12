@@ -316,7 +316,7 @@ Before you begin, ensure you have the following:
 - Target SNS topic
 - Matched event preview
 
-[→ View `cloudwatch.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/cloudwatch.tf)
+[deploy.yml](https://github.com/monrdeme/secure-static-site-aws/blob/main/.github/workflows/deploy.yml)
 
 
 
