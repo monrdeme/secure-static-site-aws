@@ -50,7 +50,7 @@ Before you begin, ensure you have the following:
     - [Step 4: S3 Buckets Configuration](#step-4-s3-buckets-configuration)
     - [Step 5: IAM Roles and Policies](#step-iam-roles-and-policies)
     - [Step 6: CloudTrail Configuration](#step-6-cloudtrail-configuration)
-    - [Step 7: Enable GuardDuty](#step-7-enable-guardduty)
+    - [Step 7: GuardDuty Configuration](#step-7-guardduty-configuration)
     - [Step 8: Configure Cloudwatch Log Group and EventBridge Ruless](#step-8-configure-cloudwatch-log-group-and-eventbridge-rules)
     - [Step 9: Configure SNS Notifications](#step-9-configure-sns-notifications)
     - [Step 10: Automate File Uploads](#step-10-automate-file-uploads)
@@ -91,7 +91,7 @@ Before you begin, ensure you have the following:
 - S3 bucket with versioning and server-side encryption to protect Terraform state history.
 - DynamoDB table for state locking to prevent concurrent operations.
 
-**Implementation Prerequisites**:
+**Implementation Details**:
 - You must manually create:
     - An S3 bucket (e.g. `secure-static-site-aws-tf-state`)
         - Enable versioning
@@ -209,17 +209,22 @@ Before you begin, ensure you have the following:
 
 ---
 
-### Step 7: Enable GuardDuty (`guardduty.tf`)
+### Step 7: GuardDuty Configuration (`guardduty.tf`)
 
 **Purpose**:
-- Detect threats like port scanning, compromised credentials, or unusual activity
+- Enable threat detection across AWS accounts.
+
+**Security Measures**:
+- Activated GuardDuty with all available detectors.
+- Integrated with EventBridge to forward high and critical-severity findings to SNS.
+- Centralized alerting for suspicious behavior (e.g., anomalous API calls, port scanning).
 
 **Screenshots to Include**:
 - GuardDuty console
 - Sample findings
 - Detector configuration
 
-[→ View `guardduty.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/guardduty.tf)
+[guardduty.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/guardduty.tf)
 
 ---
 
