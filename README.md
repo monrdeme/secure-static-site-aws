@@ -51,8 +51,8 @@ Before you begin, ensure you have the following:
     - [Step 5: IAM Roles and Policies](#step-iam-roles-and-policies)
     - [Step 6: CloudTrail Configuration](#step-6-cloudtrail-configuration)
     - [Step 7: GuardDuty Configuration](#step-7-guardduty-configuration)
-    - [Step 8: CloudWatch and EventBridge Configuration](#step-8-configure-cloudwatch-log-group-and-eventbridge-rules)
-    - [Step 9: Configure SNS Notifications](#step-9-configure-sns-notifications)
+    - [Step 8: CloudWatch and EventBridge Configuration](#step-8-cloudwatch-and-eventbridge-configuration)
+    - [Step 9: SNS Security Alerts](#step-9-sns-security-alerts)
     - [Step 10: Automate File Uploads](#step-10-automate-file-uploads)
     - [Step 11: Configure GitHub Actions CI/CD](#step-11-configure-github-actions-cicd)
 6. [Screenshots](#screenshots)
@@ -255,20 +255,29 @@ Before you begin, ensure you have the following:
 
 ---
 
-### Step 9: Configure SNS Notifications (`sns.tf`)
+### Step 9: SNS Security Alerts (`sns.tf`)
 
 **Purpose**:
-- Send security alerts via email
+- Set up real-time security alerts to notify administrators of suspicious activity.
 
-**Setup**:
-- Two SNS topics: one for CloudTrail, one for GuardDuty
-- Your email subscribed for alerts
+**Security Measures**:
+- Created SNS topic for CloudTrail and GuardDuty alerts.
+- Subscribed a verified email address to receive notifications.
+- Restricted publish/subscribe permissions to authorized services and users.
+- Integrated with EventBridge rules to trigger alerts only for high/critical findings or events.
+
+**Implementation Details**:
+- SNS topic:
+    - `secure-static-site-aws-security-alerts`
+    - Email subscription requires manual confirmation.
+    - Corresponds to the CloudTrail and GuardDuty EventBridge rules.
+    - SNS topic policies limit publishing to EventBridge and restrict subscription management.
 
 **Screenshots to Include**:
 - SNS topics and subscriptions
 - Example email received
 
-[→ View `sns.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/sns.tf)
+[sns.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/sns.tf)
 
 ---
 
