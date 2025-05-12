@@ -101,13 +101,13 @@ Before you begin, ensure you have the following:
         - With partition key: LockID (type: String)
 - Once created, reference these in your backend.tf before running terraform init.
 
-[backend.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/backend.tf)
-
-**Terraform State File S3 Bucket**:
+**Terraform state file bucket**:
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/977d3916-1ef8-4b31-bec6-0bd9a3bf7b1d">
 
-**DynamoDB Table**:
+**DynamoDB table**:
 <img width="1212" alt="image" src="https://i.imgur.com/EtP74v2.png">
+
+[backend.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/backend.tf)
 
 ---
 
@@ -151,7 +151,9 @@ Before you begin, ensure you have the following:
     - Dedicated for CloudTrail logs.
     - Public access completely blocked.
 
-**Screenshots to Include**:
+**Website and logging buckets**:
+<img width="1212" alt="image" src="https://i.imgur.com/DuYdKYf.png">
+
 - Public access settings
 - Bucket policy viewer
 - Static website hosting tab
@@ -183,7 +185,11 @@ Before you begin, ensure you have the following:
     - Granted only s3:GetObject on specific paths.
     - Intended for static content consumers (e.g., public or CloudFront).
 
-**Screenshots to Include**:
+**IAM Roles**:
+<img width="1212" alt="image" src="https://i.imgur.com/zf2hSml.png">
+
+**IAM Policies**:
+<img width="1212" alt="image" src="https://i.imgur.com/Cd529TA.png">
 - IAM Roles page
 - Trust relationships
 - Attached policies
@@ -207,6 +213,7 @@ Before you begin, ensure you have the following:
 - CloudTrail logs stored in the `secure-static-site-aws-logging` bucket.
 
 **Screenshots to Include**:
+<img width="1212" alt="image" src="https://i.imgur.com/EtP74v2.png">
 - CloudTrail config page
 - Event selector (Management events only)
 - S3 log bucket config
@@ -226,6 +233,7 @@ Before you begin, ensure you have the following:
 - Centralized alerting for suspicious behavior (e.g., anomalous API calls, port scanning).
 
 **Screenshots to Include**:
+<img width="1212" alt="image" src="https://i.imgur.com/EtP74v2.png">
 - GuardDuty console
 - Sample findings
 - Detector configuration
@@ -253,6 +261,7 @@ Before you begin, ensure you have the following:
 - CloudWatch Log Group created for long-term centralized storage and future metric filtering.
 
 **Screenshots to Include**:
+<img width="1212" alt="image" src="https://i.imgur.com/EtP74v2.png">
 - Event pattern config
 - Target SNS topic
 - Matched event preview
@@ -280,6 +289,7 @@ Before you begin, ensure you have the following:
     - SNS topic policies limit publishing to EventBridge and restrict subscription management.
 
 **Screenshots to Include**:
+<img width="1212" alt="image" src="https://i.imgur.com/EtP74v2.png">
 - SNS topics and subscriptions
 - Example email received
 
