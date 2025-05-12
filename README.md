@@ -54,7 +54,7 @@ Before you begin, ensure you have the following:
     - [Step 8: CloudWatch and EventBridge Configuration](#step-8-cloudwatch-and-eventbridge-configuration)
     - [Step 9: SNS Security Alerts](#step-9-sns-security-alerts)
     - [Step 10: Python Automation Script](#step-10-python-automation-script)
-    - [Step 11: Configure GitHub Actions CI/CD](#step-11-configure-github-actions-cicd)
+    - [Step 11: GitHub Actions Workflow](#step-11-configure-github-actions-cicd)
 6. [Screenshots](#screenshots)
 7. [Security Best Practices Implemented](#security-best-practices-implemented)
 8. [Conclusion](#conclusion)
@@ -287,25 +287,29 @@ Before you begin, ensure you have the following:
 - Automate the upload of static website content to the S3 bucket, ensuring correct metadata and permissions.
 
 **Security Measures**:
-- Checks S3 Bucket Permissions Before Uploading
-- Automatically sets Content-Type headers for HTML, CSS, JS, and image files.
-- Handles AWS SDK Errors Securely
+- Checked S3 Bucket Permissions Before Uploading.
+- Automatically set Content-Type headers for HTML, CSS, JS, and image files.
+- Handled AWS SDK Errors Securely.
 
 **Implementation Details**:
-- Recursively scans the local website/ directory.
-- Uploads each file to the specified S3 bucket using put_object().
-- Sets metadata (e.g., ContentType) based on file extension.
-- Includes logging for each file upload with success/failure status.
+- Recursively scanned the local website/ directory.
+- Uploaded each file to the specified S3 bucket using put_object().
+- Set metadata (e.g., ContentType) based on file extension.
+- Included logging for each file upload with success/failure status.
 
-[upload_files.py](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/upload_files.py)
+[upload_files.py](https://github.com/monrdeme/secure-static-site-aws/blob/main/scripts/upload_files.py)
 
 ---
 
-### Step 11: Configure GitHub Actions CI/CD (`deploy.yml`)
+### Step 11: GitHub Actions Workflow (`deploy.yml`)
 
 **Purpose**:
-- CloudTrail abnormal API activity
-- High/Critical GuardDuty findings
+- Automate website updates on code push.
+
+**Security Measures**:
+- Stored sensitive data in encrypted GitHub Secrets.
+- Ran on GitHub-managed Ubuntu VM.
+- Used the latest stable action versions.
 
 **Screenshots to Include**:
 - Event pattern config
