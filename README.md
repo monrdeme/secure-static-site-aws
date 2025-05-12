@@ -53,7 +53,7 @@ Before you begin, ensure you have the following:
     - [Step 7: GuardDuty Configuration](#step-7-guardduty-configuration)
     - [Step 8: CloudWatch and EventBridge Configuration](#step-8-cloudwatch-and-eventbridge-configuration)
     - [Step 9: SNS Security Alerts](#step-9-sns-security-alerts)
-    - [Step 10: Automate File Uploads](#step-10-automate-file-uploads)
+    - [Step 10: Python Automation Script](#step-10-python-automation-script)
     - [Step 11: Configure GitHub Actions CI/CD](#step-11-configure-github-actions-cicd)
 6. [Screenshots](#screenshots)
 7. [Security Best Practices Implemented](#security-best-practices-implemented)
@@ -281,14 +281,23 @@ Before you begin, ensure you have the following:
 
 ---
 
-### Step 10: Automate File Uploads (`upload_files.py`)
+### Step 10: Python Automation Script (`upload_files.py`)
 
 **Purpose**:
-- Upload all static website files in `./website/` to S3 with correct metadata (like `Content-Type`)
+- Automate the upload of static website content to the S3 bucket, ensuring correct metadata and permissions.
 
-**Command**:
+**Security Measures**:
+- Checks S3 Bucket Permissions Before Uploading
+- Automatically sets Content-Type headers for HTML, CSS, JS, and image files.
+- Handles AWS SDK Errors Securely
 
-`python3 scripts/upload_files.py`
+**Implementation Details**:
+- Recursively scans the local website/ directory.
+- Uploads each file to the specified S3 bucket using put_object().
+- Sets metadata (e.g., ContentType) based on file extension.
+- Includes logging for each file upload with success/failure status.
+
+[upload_files.py](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/upload_files.py)
 
 ---
 
