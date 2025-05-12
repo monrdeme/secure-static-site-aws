@@ -45,7 +45,7 @@ Before you begin, ensure you have the following:
 
 1. [Deployment Workflow](#project-overview)
     - [Step 1: Static Website Files](#step-1-static-website-files)
-    - [Step 2: Configure Terraform Remote State](#step-2-configure-terraform-remote)
+    - [Step 2: Backend Configuration](#step-2-backend-configuration)
     - [Step 3: Terraform Variables](#step-3-terraform-variables)
     - [Step 4: S3 Buckets Configuration](#step-4-s3-buckets-configuration)
     - [Step 5: IAM Roles and Policies](#step-iam-roles-and-policies)
@@ -82,36 +82,26 @@ Before you begin, ensure you have the following:
 
 ---
 
-### Step 2: Configure Terraform Remote State
+### Step 2: Backend Configuration (`backend.tf`)
 
 **Purpose**: 
-- Store Terraform state files remotely
-- Enable state locking to prevent concurrent modifications
+- Securely store Terraform state files for safe and collaborative infrastructure deployments.
 
-**Actions**:
-#### 1. Create S3 Bucket for Terraform State
-- Go to the **AWS Console > S3**
-- Click **Create bucket**
-- Name the bucket (e.g. `secure-static-site-aws-tf-state`)
-- Block all public access
-- Enable **Versioning** (important for rollback)
-- Leave the rest as default, and create the bucket
+**Security Measures**:
+- S3 bucket with versioning and server-side encryption to protect Terraform state history.
+- DynamoDB table for state locking to prevent concurrent operations.
 
-#### 2. Create DynamoDB Table for State Locking
-- Go to the **AWS Console > DynamoDB**
-- Click **Create table**
-- **Table name**: (e.g. `tf-state-lock`)
-- **Partition key**: `LockID` (Type: String)
-- Leave all other settings as default
-- Create the table
-
-#### 3. Update `backend.tf`
-In your Terraform project, update or create `backend.tf`:
+**Implementation Prerequisites**:
+- You must manually create:
+    - An S3 bucket (e.g. `secure-static-site-aws-tf-state`)
+        - Enable versioning
+        - Enable encryption (SSE-S3 or SSE-KMS)
+        - Block all public access
+    - A DynamoDB Table (e.g. `tf-state-lock`)
+        - With partition key: LockID (type: String)
+- Once created, reference these in your backend.tf before running terraform init.
 
 [backend.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/backend.tf)
-
-#### 4. Initialize Terraform Backend
-`terraform init`
 
 ---
 
