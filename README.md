@@ -51,7 +51,7 @@ Before you begin, ensure you have the following:
     - [Step 5: IAM Roles and Policies](#step-iam-roles-and-policies)
     - [Step 6: CloudTrail Configuration](#step-6-cloudtrail-configuration)
     - [Step 7: GuardDuty Configuration](#step-7-guardduty-configuration)
-    - [Step 8: Configure Cloudwatch Log Group and EventBridge Ruless](#step-8-configure-cloudwatch-log-group-and-eventbridge-rules)
+    - [Step 8: CloudWatch and EventBridge Configuration](#step-8-configure-cloudwatch-log-group-and-eventbridge-rules)
     - [Step 9: Configure SNS Notifications](#step-9-configure-sns-notifications)
     - [Step 10: Automate File Uploads](#step-10-automate-file-uploads)
     - [Step 11: Configure GitHub Actions CI/CD](#step-11-configure-github-actions-cicd)
@@ -216,7 +216,7 @@ Before you begin, ensure you have the following:
 
 **Security Measures**:
 - Activated GuardDuty with all available detectors.
-- Integrated with EventBridge to forward high and critical-severity findings to SNS.
+- Integrated with Cloudwatch and EventBridge to forward high and critical-severity findings to SNS.
 - Centralized alerting for suspicious behavior (e.g., anomalous API calls, port scanning).
 
 **Screenshots to Include**:
@@ -228,19 +228,30 @@ Before you begin, ensure you have the following:
 
 ---
 
-### Step 8: Configure Cloudwatch Log Group and EventBridge Rules (`cloudwatch.tf`)
+### Step 8: CloudWatch and EventBridge Configuration (`cloudwatch.tf`)
 
 **Purpose**:
-- Forward:
-  - CloudTrail abnormal API activity
-  - High/Critical GuardDuty findings
+- Monitor security-related events and route them to appropriate destinations for alerting.
+
+**Security Measures**:
+- Created CloudWatch Log Groups to collect relevant logs.
+- Configured EventBridge rules to match high and critical-severity GuardDuty findings and sensitive CloudTrail activity.
+- Integrated SNS as a target to ensure alerts are sent in real time.
+- Ensured only necessary principals can create or modify EventBridge rules and targets.
+
+**Implementation Details**:
+- EventBridge rules match:
+    - GuardDuty findings with severity ≥ 8.
+    - CloudTrail events such as DeleteBucket, PutBucketPolicy, or AssumeRole.
+- Rules forward matched events to SNS topics for email notifications.
+- CloudWatch Log Group created for long-term centralized storage and future metric filtering.
 
 **Screenshots to Include**:
 - Event pattern config
 - Target SNS topic
 - Matched event preview
 
-[→ View `cloudwatch.tf`](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/cloudwatch.tf)
+[cloudwatch.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/cloudwatch.tf)
 
 ---
 
