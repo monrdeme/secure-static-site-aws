@@ -377,3 +377,16 @@ SNS alert triggered by a high-risk CloudTrail event such as `CreateUser`.
 <img width="1212" alt="image" src="https://i.imgur.com/NTCTURO.png)">
 
 <img width="1212" alt="image" src="https://i.imgur.com/NTCTURO.png)">
+
+---
+
+## Conclusion
+
+This project demonstrates how to securely deploy a static website on AWS using Terraform and Python while following cloud security best practices. By combining infrastructure as code, role-based access control, automated deployments, and real-time monitoring, it provides a robust and scalable foundation suitable for production or learning environments.
+
+Key takeaways include:
+
+- Secure S3 configuration for public static content with minimal access exposure.
+- IAM roles designed around least privilege and role assumption for better auditability.
+- End-to-end monitoring and alerting through CloudTrail, GuardDuty, EventBridge, and SNS.
+- Automation with Python and GitHub Actions to streamline operations and ensure consistent deployments.
