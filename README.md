@@ -61,7 +61,7 @@ Before you begin, ensure you have the following:
 
 ---
 
-## Deployment Workflow
+## Walkthrough
 
 ### Step 1: Static Website Files (`website/`)
 
@@ -101,10 +101,10 @@ Before you begin, ensure you have the following:
         - With partition key: LockID (type: String)
 - Once created, reference these in your backend.tf before running terraform init.
 
-**Terraform state file bucket**:
+**Terraform State File Bucket**:
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/977d3916-1ef8-4b31-bec6-0bd9a3bf7b1d">
 
-**DynamoDB table**:
+**DynamoDB Table**:
 <img width="1212" alt="image" src="https://i.imgur.com/EtP74v2.png">
 
 [backend.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/backend.tf)
@@ -151,7 +151,7 @@ Before you begin, ensure you have the following:
     - Dedicated for CloudTrail logs.
     - Public access completely blocked.
 
-**Website and logging buckets**:
+**Website and Logging Buckets**:
 <img width="1212" alt="image" src="https://i.imgur.com/DuYdKYf.png">
 
 - Public access settings
@@ -263,7 +263,7 @@ Before you begin, ensure you have the following:
 **CloudWatch Logs Group for CloudTrail**:
 <img width="1212" alt="image" src="https://i.imgur.com/xhXkmMu.png">
 
-**EventBridge Rules**:
+**EventBridge rules**:
 <img width="1212" alt="image" src="https://i.imgur.com/JECAYJe.png">
 - Event pattern config
 - Target SNS topic
