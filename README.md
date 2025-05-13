@@ -324,7 +324,18 @@ Before you begin, ensure you have the following:
 
 ## Project Testing & Validation
 
+### Static Website Access
+**Test Objective**: 
+- Confirm that the static website is publicly accessible.
 
+**Validation Steps**:
+- Accessed the static website via the S3 website endpoint.
+
+**Access to `index.html` Through the S3 Website Endpoint**.
+<img width="1212" alt="image" src="https://i.imgur.com/6ph1OuC.png">
+
+
+<img width="1212" alt="image" src="https://i.imgur.com/NTCTURO.png)">
 
 
 
