@@ -81,7 +81,6 @@ Before you begin, ensure you have the following:
 
 [website/](https://github.com/monrdeme/secure-static-site-aws/tree/main/website)
  
-
 ---
 
 ### Step 2: Backend Configuration (`backend.tf`)
@@ -322,9 +321,11 @@ Before you begin, ensure you have the following:
 
 [deploy.yml](https://github.com/monrdeme/secure-static-site-aws/blob/main/.github/workflows/deploy.yml)
 
+---
+
 ## Project Testing & Validation
 
-### Static Website Access
+### Test 1: Static Website Access
 **Test Objective**: 
 - Confirm that the static website is publicly accessible.
 
@@ -337,8 +338,42 @@ Before you begin, ensure you have the following:
 
 <img width="1212" alt="image" src="https://i.imgur.com/NTCTURO.png)">
 
+---
 
+### Test 2: IAM Role Assumption & Permissions
+**Test Objective**: 
+- Ensure that IAM roles can be assumed securely and that permissions are tightly scoped using least privilege.
 
+**Validation Steps**:
+- Successfully assumed each role using sts:assume-role (admin, read-only, write-only).
+- Verified allowed actions (e.g., upload files with write-only, read objects with read-only).
+- Attempted disallowed actions (e.g., read with write-only role) and confirmed access was denied.
 
+<img width="1212" alt="image" src="https://i.imgur.com/NTCTURO.png)">
 
+---
 
+### Test 3: SNS Security Alerts
+**Test Objective**: 
+- Validate that high/critical severity GuardDuty findings and specified CloudTrail events (e.g., high-risk IAM actions) trigger SNS notifications via EventBridge.
+
+**Validation Steps**:
+- GuardDuty Alerts:
+    - Simulated GuardDuty findings using AWS sample findings.
+    - Verified that EventBridge detected the finding and triggered the associated SNS topic.
+    - Received the alert email successfully.
+ 
+SNS Email Alert Received After a GuardDuty Finding was Detected.
+<img width="1212" alt="image" src="https://i.imgur.com/NTCTURO.png)">
+
+<img width="1212" alt="image" src="https://i.imgur.com/NTCTURO.png)">
+
+- CloudTrail-Based Alerts:
+    - Performed a monitored CloudTrail event (e.g., `DeleteBucket`, `PutBucketPolicy`, or `CreateUser`).
+    - Confirmed that EventBridge matched the event pattern and invoked the SNS topic.
+    - Received the notification email.
+
+SNS alert triggered by a high-risk CloudTrail event such as `CreateUser`.
+<img width="1212" alt="image" src="https://i.imgur.com/NTCTURO.png)">
+
+<img width="1212" alt="image" src="https://i.imgur.com/NTCTURO.png)">
