@@ -213,7 +213,7 @@ Before you begin, ensure you have the following:
 - CloudTrail logs stored in the `secure-static-site-aws-logging` bucket.
 
 **Screenshots to Include**:
-<img width="1212" alt="image" src="https://i.imgur.com/EtP74v2.png">
+<img width="1212" alt="image" src="https://i.imgur.com/igZS5vA.png">
 - CloudTrail config page
 - Event selector (Management events only)
 - S3 log bucket config
