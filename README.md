@@ -233,7 +233,7 @@ Before you begin, ensure you have the following:
 - Centralized alerting for suspicious behavior (e.g., anomalous API calls, port scanning).
 
 **Screenshots to Include**:
-<img width="1212" alt="image" src="https://i.imgur.com/EtP74v2.png">
+<img width="1212" alt="image" src="https://i.imgur.com/8ftjRgK.png">
 - GuardDuty console
 - Sample findings
 - Detector configuration
