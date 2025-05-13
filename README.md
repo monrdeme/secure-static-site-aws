@@ -55,7 +55,6 @@ Before you begin, ensure you have the following:
     - [Step 9: SNS Security Alerts](#step-9-sns-security-alerts)
     - [Step 10: Python Automation Script](#step-10-python-automation-script)
     - [Step 11: GitHub Actions Workflow](#step-11-configure-github-actions-cicd)
-6. [Screenshots](#screenshots)
 7. [Security Best Practices Implemented](#security-best-practices-implemented)
 8. [Conclusion](#conclusion)
 
@@ -171,7 +170,7 @@ Before you begin, ensure you have the following:
 **Implementation Details**:
 - **Admin Role**:
     - Full access to all project resources (used for provisioning and testing).
-    - Trusted by your IAM user or GitHub Actions via OIDC.
+    - Trusted by your IAM user
 - **Write-Only Role**:
     - Scoped permissions for uploading files to the website S3 bucket.
     - Allowed actions include `s3:PutObject` and `s3:ListBucket`.
@@ -315,10 +314,8 @@ Before you begin, ensure you have the following:
 - Ran on GitHub-managed Ubuntu VM.
 - Used the latest stable action versions.
 
-**Screenshots to Include**:
-- Event pattern config
-- Target SNS topic
-- Matched event preview
+**GitHub Actions Successfully Running Python Script to Deploy the Website with Permission Checks and Correct Content Types**:
+<img width="1212" alt="image" src="https://i.imgur.com/GYMiXaN.png">
 
 [deploy.yml](https://github.com/monrdeme/secure-static-site-aws/blob/main/.github/workflows/deploy.yml)
 
