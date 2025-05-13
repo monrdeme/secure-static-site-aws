@@ -212,7 +212,7 @@ Before you begin, ensure you have the following:
 - Single CloudTrail trail covering all regions.
 - CloudTrail logs stored in the `secure-static-site-aws-logging` bucket.
 
-**Screenshots to Include**:
+**CloudTrail Trail**:
 <img width="1212" alt="image" src="https://i.imgur.com/igZS5vA.png">
 - CloudTrail config page
 - Event selector (Management events only)
@@ -232,7 +232,7 @@ Before you begin, ensure you have the following:
 - Integrated with Cloudwatch and EventBridge to forward high and critical-severity findings to SNS.
 - Centralized alerting for suspicious behavior (e.g., anomalous API calls, port scanning).
 
-**Screenshots to Include**:
+**GuardDuty Findings**:
 <img width="1212" alt="image" src="https://i.imgur.com/8ftjRgK.png">
 - GuardDuty console
 - Sample findings
@@ -260,8 +260,11 @@ Before you begin, ensure you have the following:
 - Rules forward matched events to SNS topics for email notifications.
 - CloudWatch Log Group created for long-term centralized storage and future metric filtering.
 
-**Screenshots to Include**:
-<img width="1212" alt="image" src="https://i.imgur.com/EtP74v2.png">
+**CloudWatch Logs Group for CloudTrail**:
+<img width="1212" alt="image" src="https://i.imgur.com/xhXkmMu.png">
+
+**EventBridge Rules**:
+<img width="1212" alt="image" src="https://i.imgur.com/JECAYJe.png">
 - Event pattern config
 - Target SNS topic
 - Matched event preview
