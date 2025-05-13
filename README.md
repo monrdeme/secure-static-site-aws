@@ -61,7 +61,7 @@ Before you begin, ensure you have the following:
 
 ---
 
-## Walkthrough
+## Deployment Workflow
 
 ### Step 1: Static Website Files (`website/`)
 
@@ -154,10 +154,6 @@ Before you begin, ensure you have the following:
 **Website and Logging Buckets**:
 <img width="1212" alt="image" src="https://i.imgur.com/DuYdKYf.png">
 
-- Public access settings
-- Bucket policy viewer
-- Static website hosting tab
-
 [s3.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/s3.tf)
 
 ---
@@ -178,11 +174,11 @@ Before you begin, ensure you have the following:
     - Trusted by your IAM user or GitHub Actions via OIDC.
 - **Write-Only Role**:
     - Scoped permissions for uploading files to the website S3 bucket.
-    - Allowed actions include s3:PutObject and s3:ListBucket.
+    - Allowed actions include `s3:PutObject` and `s3:ListBucket`.
     - Trusted by CI/CD pipeline (e.g., GitHub Actions).
 - **Read-Only Role**:
     - Read-only access to the website content bucket.
-    - Granted only s3:GetObject on specific paths.
+    - Granted only `s3:GetObject` on specific paths.
     - Intended for static content consumers (e.g., public or CloudFront).
 
 **IAM Roles**:
@@ -190,9 +186,6 @@ Before you begin, ensure you have the following:
 
 **IAM Policies**:
 <img width="1212" alt="image" src="https://i.imgur.com/Cd529TA.png">
-- IAM Roles page
-- Trust relationships
-- Attached policies
 
 [iam.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/iam.tf)
 
@@ -214,9 +207,6 @@ Before you begin, ensure you have the following:
 
 **CloudTrail Trail**:
 <img width="1212" alt="image" src="https://i.imgur.com/igZS5vA.png">
-- CloudTrail config page
-- Event selector (Management events only)
-- S3 log bucket config
 
 [cloudtrail.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/cloudtrail.tf)
 
@@ -234,9 +224,6 @@ Before you begin, ensure you have the following:
 
 **GuardDuty Findings**:
 <img width="1212" alt="image" src="https://i.imgur.com/8ftjRgK.png">
-- GuardDuty console
-- Sample findings
-- Detector configuration
 
 [guardduty.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/guardduty.tf)
 
@@ -265,9 +252,6 @@ Before you begin, ensure you have the following:
 
 **EventBridge rules**:
 <img width="1212" alt="image" src="https://i.imgur.com/JECAYJe.png">
-- Event pattern config
-- Target SNS topic
-- Matched event preview
 
 [cloudwatch.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/cloudwatch.tf)
 
@@ -296,8 +280,6 @@ Before you begin, ensure you have the following:
 
 **SNS Subscription**:
 <img width="1212" alt="image" src="https://i.imgur.com/ZCksVOP.png">
-- SNS topics and subscriptions
-- Example email received
 
 [sns.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/sns.tf)
 
@@ -314,8 +296,8 @@ Before you begin, ensure you have the following:
 - Handled AWS SDK Errors Securely.
 
 **Implementation Details**:
-- Recursively scanned the local website/ directory.
-- Uploaded each file to the specified S3 bucket using put_object().
+- Recursively scanned the local `website/` directory.
+- Uploaded each file to the specified S3 bucket using `put_object()`.
 - Set metadata (e.g., ContentType) based on file extension.
 - Included logging for each file upload with success/failure status.
 
