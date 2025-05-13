@@ -55,7 +55,10 @@ Before you begin, ensure you have the following:
     - [Step 9: SNS Security Alerts](#step-9-sns-security-alerts)
     - [Step 10: Python Automation Script](#step-10-python-automation-script)
     - [Step 11: GitHub Actions Workflow](#step-11-configure-github-actions-cicd)
-7. [Security Best Practices Implemented](#security-best-practices-implemented)
+2. [Project Testing & Validation](#project-testing-&-validation)
+   - [Test 1: Static Website Access](#test1-static-website-access)
+   - [Test 2: IAM Role Assumption and Permissions](#test2-iam-role-assumption-and-permissions)
+   - [Test 3: SNS Alerting](#test3-sns-alerting)
 8. [Conclusion](#conclusion)
 
 ---
@@ -319,7 +322,7 @@ Before you begin, ensure you have the following:
 
 [deploy.yml](https://github.com/monrdeme/secure-static-site-aws/blob/main/.github/workflows/deploy.yml)
 
-
+## Project Testing & Validation
 
 
 
