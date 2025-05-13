@@ -220,7 +220,7 @@ Before you begin, ensure you have the following:
 
 **Security Measures**:
 - Activated GuardDuty with all available detectors.
-- Integrated with Cloudwatch and EventBridge to forward high and critical-severity findings to SNS.
+- Integrated with Cloudwatch and EventBridge to forward high-severity findings to SNS.
 - Centralized alerting for suspicious behavior (e.g., anomalous API calls, port scanning).
 
 **GuardDuty Findings**:
@@ -237,7 +237,7 @@ Before you begin, ensure you have the following:
 
 **Security Measures**:
 - Created CloudWatch Log Groups to collect relevant logs.
-- Configured EventBridge rules to match high and critical-severity GuardDuty findings and sensitive CloudTrail activity.
+- Configured EventBridge rules to match high-severity GuardDuty findings and sensitive CloudTrail activity.
 - Integrated SNS as a target to ensure alerts are sent in real time.
 - Ensured only necessary principals can create or modify EventBridge rules and targets.
 
@@ -267,7 +267,7 @@ Before you begin, ensure you have the following:
 - Created SNS topic for CloudTrail and GuardDuty alerts.
 - Subscribed a verified email address to receive notifications.
 - Restricted publish/subscribe permissions to authorized services and users.
-- Integrated with EventBridge rules to trigger alerts only for high/critical findings or events.
+- Integrated with EventBridge rules to trigger alerts for high-severity findings or events.
 
 **Implementation Details**:
 - SNS topic:
@@ -355,7 +355,7 @@ Before you begin, ensure you have the following:
 
 ### Test 3: SNS Security Alerts
 **Test Objective**: 
-- Validate that high/critical severity GuardDuty findings and specified CloudTrail events (e.g., high-risk IAM actions) trigger SNS notifications via EventBridge.
+- Validate that high-severity GuardDuty findings and specified CloudTrail events (e.g., high-risk IAM actions) trigger SNS notifications via EventBridge.
 
 **Validation Steps**:
 - GuardDuty Alerts:
