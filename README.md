@@ -349,19 +349,36 @@ Before you begin, ensure you have the following:
 - Verified allowed actions (e.g., upload files with write-only, read objects with read-only).
 - Attempted disallowed actions (e.g., read with write-only role) and confirmed access was denied.
 
-**Admin Role Assumption**:
+**Admin Role**:
+- Assume Role (Allow):
 <img width="1212" alt="image" src="https://i.postimg.cc/26rKgHcS/image.png">
 
-**Admin Role Listing all Buckets**:
+- List All Buckets (Allow):
 <img width="1212" alt="image" src="https://i.postimg.cc/tTXdt8Jp/image.png">
 
+---
 
-**Write-Only Role Assumption**:
+**Write-Only Role**:
+- Assume Role (Allow):
 <img width="1212" alt="image" src="https://i.postimg.cc/yNmLsFtp/image.png">
 
-**Read-Only Role Assumption**:
+- Write File to Website Bucket (Allow):
+<img width="1212" alt="image" src="https://i.postimg.cc/hvkHb4g5/image.png">
+
+- Read File (Deny):
+<img width="1212" alt="image" src="https://i.postimg.cc/LsSvkYPP/image.png">
+
+---
+
+**Read-Only Role**:
+- Assume Role (Allow):
 <img width="1212" alt="image" src="https://i.postimg.cc/6q9T2NHx/image.png">
 
+- Read File in Website Bucket (Allow):
+<img width="1212" alt="image" src="https://i.postimg.cc/C5xCKX2r/image.png">
+
+- Write File (Deny):
+<img width="1212" alt="image" src="https://i.postimg.cc/vBN7c3dQ/image.png">
 
 ---
 
@@ -376,9 +393,9 @@ Before you begin, ensure you have the following:
     - Received the alert email successfully.
  
 SNS Email Alert Received After a GuardDuty Finding was Detected.
-<img width="1212" alt="image" src="https://i.imgur.com/NTCTURO.png)">
+<img width="1212" alt="image" src="https://i.postimg.cc/pLJMgV4t/image.png">
 
-<img width="1212" alt="image" src="https://i.imgur.com/NTCTURO.png)">
+<img width="1212" alt="image" src="https://i.postimg.cc/6QRKYLKY/image.png">
 
 - CloudTrail-Based Alerts:
     - Performed a monitored CloudTrail event (e.g., `DeleteBucket`, `PutBucketPolicy`, or `CreateUser`).
