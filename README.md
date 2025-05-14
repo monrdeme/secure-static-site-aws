@@ -317,7 +317,7 @@ Before you begin, ensure you have the following:
 - Used the latest stable action versions.
 
 **GitHub Actions Successfully Running Python Script to Deploy the Website with Permission Checks and Correct Content Types**:
-<img width="1212" alt="image" src="https://i.imgur.com/GYMiXaN.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/VkK4FWnt/image.png">
 
 [deploy.yml](https://github.com/monrdeme/secure-static-site-aws/blob/main/.github/workflows/deploy.yml)
 
@@ -333,10 +333,10 @@ Before you begin, ensure you have the following:
 - Accessed the static website via the S3 website endpoint.
 
 **Access to `index.html` Through the S3 Website Endpoint**.
-<img width="1212" alt="image" src="https://i.imgur.com/6ph1OuC.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/Xq8GfxmB/image.png">
 
 
-<img width="1212" alt="image" src="https://i.imgur.com/NTCTURO.png)">
+<img width="1212" alt="image" src="https://i.postimg.cc/QCc81qYG/image.png">
 
 ---
 
