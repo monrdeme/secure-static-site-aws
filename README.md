@@ -350,13 +350,13 @@ Before you begin, ensure you have the following:
 - Attempted disallowed actions (e.g., read with write-only role) and confirmed access was denied.
 
 **Admin Role Assumption**
-<img width="1212" alt="image" src="https://i.postimg.cc/vBT3ZS1Z/image.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/Kz03DwSS/image.png">
 
 **Write-Only Role Assumption**
-<img width="1212" alt="image" src="https://i.postimg.cc/NMKthtcs/image.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/rspnfBDS/image.png">
 
 **Read-Only Role Assumption**
-<img width="1212" alt="image" src="https://i.postimg.cc/7b8XH3Js/image.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/zGMkNLVH/image.png">
 
 
 ---
