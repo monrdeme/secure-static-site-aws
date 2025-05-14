@@ -207,7 +207,7 @@ Before you begin, ensure you have the following:
 - CloudTrail logs stored in the `secure-static-site-aws-logging` bucket.
 
 **CloudTrail Trail**:
-<img width="1212" alt="image" src="https://i.imgur.com/igZS5vA.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/9fFvRcsV/image.png">
 
 [cloudtrail.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/cloudtrail.tf)
 
@@ -223,8 +223,8 @@ Before you begin, ensure you have the following:
 - Integrated with Cloudwatch and EventBridge to forward high-severity findings to SNS.
 - Centralized alerting for suspicious behavior (e.g., anomalous API calls, port scanning).
 
-**GuardDuty Findings**:
-<img width="1212" alt="image" src="https://i.imgur.com/8ftjRgK.png">
+**GuardDuty**:
+<img width="1212" alt="image" src="https://i.postimg.cc/gJVwr95V/image.png">
 
 [guardduty.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/guardduty.tf)
 
@@ -249,10 +249,10 @@ Before you begin, ensure you have the following:
 - CloudWatch Log Group created for long-term centralized storage and future metric filtering.
 
 **CloudWatch Logs Group for CloudTrail**:
-<img width="1212" alt="image" src="https://i.imgur.com/xhXkmMu.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/MKvZXMn6/image.png">
 
 **EventBridge rules**:
-<img width="1212" alt="image" src="https://i.imgur.com/JECAYJe.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/SRBk9dPW/image.png">
 
 [cloudwatch.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/cloudwatch.tf)
 
@@ -277,10 +277,10 @@ Before you begin, ensure you have the following:
     - SNS topic policies limit publishing to EventBridge and restrict subscription management.
 
 **SNS Topic**:
-<img width="1212" alt="image" src="https://i.imgur.com/zam2cV7.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/c15XGHPy/image.png">
 
 **SNS Subscription**:
-<img width="1212" alt="image" src="https://i.imgur.com/ZCksVOP.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/RFwd7QXc/image.png">
 
 [sns.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/sns.tf)
 
