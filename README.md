@@ -183,7 +183,7 @@ Before you begin, ensure you have the following:
     - Intended for static content consumers (e.g., public or CloudFront).
 
 **IAM Roles**:
-<img width="1212" alt="image" src="https://i.imgur.com/zf2hSml.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/jSM54WFF/image.png">
 
 **IAM Policies**:
 <img width="1212" alt="image" src="https://i.imgur.com/Cd529TA.png">
@@ -207,7 +207,7 @@ Before you begin, ensure you have the following:
 - CloudTrail logs stored in the `secure-static-site-aws-logging` bucket.
 
 **CloudTrail Trail**:
-<img width="1212" alt="image" src="https://i.postimg.cc/9fFvRcsV/image.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/SNxZR3cb/image.png">
 
 [cloudtrail.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/cloudtrail.tf)
 
@@ -252,7 +252,7 @@ Before you begin, ensure you have the following:
 <img width="1212" alt="image" src="https://i.postimg.cc/MKvZXMn6/image.png">
 
 **EventBridge rules**:
-<img width="1212" alt="image" src="https://i.postimg.cc/SRBk9dPW/image.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/wvZmzW8J/image.png">
 
 [cloudwatch.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/cloudwatch.tf)
 
@@ -345,11 +345,19 @@ Before you begin, ensure you have the following:
 - Ensure that IAM roles can be assumed securely and that permissions are tightly scoped using least privilege.
 
 **Validation Steps**:
-- Successfully assumed each role using sts:assume-role (admin, read-only, write-only).
+- Successfully assumed each role using `sts:assume-role` (admin, write-only, read-only).
 - Verified allowed actions (e.g., upload files with write-only, read objects with read-only).
 - Attempted disallowed actions (e.g., read with write-only role) and confirmed access was denied.
 
-<img width="1212" alt="image" src="https://i.imgur.com/NTCTURO.png)">
+**Admin Role Assumption**
+<img width="1212" alt="image" src="https://i.postimg.cc/vBT3ZS1Z/image.png">
+
+**Write-Only Role Assumption**
+<img width="1212" alt="image" src="https://i.postimg.cc/NMKthtcs/image.png">
+
+**Read-Only Role Assumption**
+<img width="1212" alt="image" src="https://i.postimg.cc/7b8XH3Js/image.png">
+
 
 ---
 
