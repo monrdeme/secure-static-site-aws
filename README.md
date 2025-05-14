@@ -349,14 +349,18 @@ Before you begin, ensure you have the following:
 - Verified allowed actions (e.g., upload files with write-only, read objects with read-only).
 - Attempted disallowed actions (e.g., read with write-only role) and confirmed access was denied.
 
-**Admin Role Assumption**
-<img width="1212" alt="image" src="https://i.postimg.cc/Kz03DwSS/image.png">
+**Admin Role Assumption**:
+<img width="1212" alt="image" src="https://i.postimg.cc/26rKgHcS/image.png">
 
-**Write-Only Role Assumption**
-<img width="1212" alt="image" src="https://i.postimg.cc/rspnfBDS/image.png">
+**Admin Role Listing all Buckets**:
+<img width="1212" alt="image" src="https://i.postimg.cc/tTXdt8Jp/image.png">
 
-**Read-Only Role Assumption**
-<img width="1212" alt="image" src="https://i.postimg.cc/zGMkNLVH/image.png">
+
+**Write-Only Role Assumption**:
+<img width="1212" alt="image" src="https://i.postimg.cc/yNmLsFtp/image.png">
+
+**Read-Only Role Assumption**:
+<img width="1212" alt="image" src="https://i.postimg.cc/6q9T2NHx/image.png">
 
 
 ---
