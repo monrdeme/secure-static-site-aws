@@ -164,22 +164,20 @@ Before you begin, ensure you have the following:
 - Define roles and permissions for resource access.
 
 **Security Measures**:
-- Created roles with the principle of least privilege.
+- Created roles following the principle of least privilege.
 - Implemented trust policies for controlled role assumption.
 - Scoped inline policies to specific actions and resources.
 
 **Implementation Details**:
 - **Admin Role**:
-    - Full access to all project resources (used for provisioning and testing).
-    - Trusted by your IAM user
+    - Full access to all S3 resources (used for provisioning and testing).
 - **Write-Only Role**:
     - Scoped permissions for uploading files to the website S3 bucket.
     - Allowed actions include `s3:PutObject` and `s3:ListBucket`.
-    - Trusted by CI/CD pipeline (e.g., GitHub Actions).
 - **Read-Only Role**:
     - Read-only access to the website content bucket.
     - Granted only `s3:GetObject` on specific paths.
-    - Intended for static content consumers (e.g., public or CloudFront).
+    - Intended for webiste content consumers
 
 **IAM Roles**:
 <img width="1212" alt="image" src="https://i.postimg.cc/jSM54WFF/image.png">
@@ -237,14 +235,14 @@ Before you begin, ensure you have the following:
 **Security Measures**:
 - Created CloudWatch Log Groups to collect relevant logs.
 - Configured EventBridge rules to match high-severity GuardDuty findings and sensitive CloudTrail activity.
-- Integrated SNS as a target to ensure alerts are sent in real time.
+- Integrated SNS as a target to ensure alerts are sent in real-time.
 - Ensured only necessary principals can create or modify EventBridge rules and targets.
 
 **Implementation Details**:
 - EventBridge rules match:
     - GuardDuty findings with severity ≥ 8.
     - CloudTrail events such as DeleteBucket, PutBucketPolicy, or AssumeRole.
-- Rules forward matched events to SNS topics for email notifications.
+- Rules forward matched events to SNS topic for email notifications.
 - CloudWatch Log Group created for long-term centralized storage and future metric filtering.
 
 **CloudWatch Logs Group for CloudTrail**:
@@ -275,10 +273,8 @@ Before you begin, ensure you have the following:
     - Corresponds to the CloudTrail and GuardDuty EventBridge rules.
     - SNS topic policies limit publishing to EventBridge and restrict subscription management.
 
-**SNS Topic**:
 <img width="1212" alt="image" src="https://i.postimg.cc/c15XGHPy/image.png">
 
-**SNS Subscription**:
 <img width="1212" alt="image" src="https://i.postimg.cc/RFwd7QXc/image.png">
 
 [sns.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/sns.tf)
@@ -288,20 +284,20 @@ Before you begin, ensure you have the following:
 ### Step 10: Python Automation Script
 
 **Purpose**:
-- Automate the upload of static website content to the S3 bucket, ensuring correct metadata and permissions.
+- Automate the upload of static website files to the S3 bucket, ensuring correct metadata and permissions.
 
 **Security Measures**:
-- Checked S3 Bucket Permissions Before Uploading.
-- Automatically set Content-Type headers for HTML, CSS, JS, and image files.
-- Handled AWS SDK Errors Securely.
+- Checks S3 bucket permissions before upload.
+- Automatically sets Content-Type headers for HTML, CSS, JS, and image files.
+- Handles AWS SDK errors securely.
 
 **Implementation Details**:
-- Recursively scanned the local `website/` directory.
-- Uploaded each file to the specified S3 bucket using `put_object()`.
-- Set metadata (e.g., ContentType) based on file extension.
-- Included logging for each file upload with success/failure status.
+- Recursively scans the local `website/` directory.
+- Uploads each file to the specified S3 bucket using `put_object()`.
+- Sets metadata `ContentType` based on file extension.
+- Includes logging for each file upload with success/failure status.
 
-[upload_files.py](https://github.com/monrdeme/secure-static-site-aws/blob/main/scripts/upload_files.py)
+[upload-files.py](https://github.com/monrdeme/secure-static-site-aws/blob/main/scripts/upload-files.py)
 
 ---
 
@@ -315,7 +311,6 @@ Before you begin, ensure you have the following:
 - Ran on GitHub-managed Ubuntu VM.
 - Used the latest stable action versions.
 
-**GitHub Actions Successfully Running Python Script to Deploy the Website with Permission Checks and Correct Content Types**:
 <img width="1212" alt="image" src="https://i.postimg.cc/VkK4FWnt/image.png">
 
 [deploy.yml](https://github.com/monrdeme/secure-static-site-aws/blob/main/.github/workflows/deploy.yml)
