@@ -43,12 +43,12 @@ Before you begin, ensure you have the following:
 
 ## Table of Contents
 
-1. [Deployment Workflow](#project-overview)
+1. [Deployment Workflow](#deployment-workflow)
     - [Step 1: Static Website Files](#step-1-static-website-files)
     - [Step 2: Backend Configuration](#step-2-backend-configuration)
     - [Step 3: Terraform Variables](#step-3-terraform-variables)
     - [Step 4: S3 Buckets Configuration](#step-4-s3-buckets-configuration)
-    - [Step 5: IAM Roles and Policies](#step-iam-roles-and-policies)
+    - [Step 5: IAM Roles and Policies](#step-5-iam-roles-and-policies)
     - [Step 6: CloudTrail Configuration](#step-6-cloudtrail-configuration)
     - [Step 7: GuardDuty Configuration](#step-7-guardduty-configuration)
     - [Step 8: CloudWatch and EventBridge Configuration](#step-8-cloudwatch-and-eventbridge-configuration)
@@ -56,9 +56,9 @@ Before you begin, ensure you have the following:
     - [Step 10: Python Automation Script](#step-10-python-automation-script)
     - [Step 11: GitHub Actions Workflow](#step-11-configure-github-actions-cicd)
 2. [Testing and Validation](#testing-and-validation)
-   - [Test 1: Static Website Access](#test1-static-website-access)
-   - [Test 2: IAM Role Assumption and Permissions](#test2-iam-role-assumption-and-permissions)
-   - [Test 3: SNS Alerting](#test3-sns-alerting)
+   - [Test 1: Static Website Access](#test-1-static-website-access)
+   - [Test 2: IAM Role Assumption and Permissions](#test-2-iam-role-assumption-and-permissions)
+   - [Test 3: SNS Alerting](#test-3-sns-alerting)
 8. [Conclusion](#conclusion)
 
 ---
