@@ -359,25 +359,25 @@ Before you begin, ensure you have the following:
 ---
 
 **Write-Only Role**:
-- Assume Role (Allow):
+**Assume Role (Allow)**:
 <img width="1212" alt="image" src="https://i.postimg.cc/yNmLsFtp/image.png">
 
-- Write File to Website Bucket (Allow):
+**Write File to Website Bucket (Allow)**:
 <img width="1212" alt="image" src="https://i.postimg.cc/hvkHb4g5/image.png">
 
-- Read File (Deny):
+**Read File (Deny)**:
 <img width="1212" alt="image" src="https://i.postimg.cc/LsSvkYPP/image.png">
 
 ---
 
 **Read-Only Role**:
-- Assume Role (Allow):
+**Assume Role (Allow)**:
 <img width="1212" alt="image" src="https://i.postimg.cc/6q9T2NHx/image.png">
 
-- Read File in Website Bucket (Allow):
+**Read File in Website Bucket (Allow)**:
 <img width="1212" alt="image" src="https://i.postimg.cc/C5xCKX2r/image.png">
 
-- Write File (Deny):
+**Write File (Deny)**:
 <img width="1212" alt="image" src="https://i.postimg.cc/vBN7c3dQ/image.png">
 
 ---
@@ -392,7 +392,7 @@ Before you begin, ensure you have the following:
     - Verified that EventBridge detected the finding and triggered the associated SNS topic.
     - Received the alert email successfully.
  
-SNS Email Alert Received After a GuardDuty Finding was Detected.
+**SNS Email Alert Received After a GuardDuty Finding was Detected**:
 <img width="1212" alt="image" src="https://i.postimg.cc/pLJMgV4t/image.png">
 
 <img width="1212" alt="image" src="https://i.postimg.cc/6QRKYLKY/image.png">
@@ -402,10 +402,10 @@ SNS Email Alert Received After a GuardDuty Finding was Detected.
     - Confirmed that EventBridge matched the event pattern and invoked the SNS topic.
     - Received the notification email.
 
-SNS alert triggered by a high-risk CloudTrail event such as `CreateUser`.
-<img width="1212" alt="image" src="https://i.imgur.com/NTCTURO.png)">
+**SNS alert triggered by a high-risk CloudTrail event such as `CreateUser`**:
+<img width="1212" alt="image" src="https://i.postimg.cc/g0N664GJ/image.png">
 
-<img width="1212" alt="image" src="https://i.imgur.com/NTCTURO.png)">
+<img width="1212" alt="image" src="https://i.postimg.cc/tgsHht6k/image.png">
 
 ---
 
