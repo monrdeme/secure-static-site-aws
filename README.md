@@ -133,7 +133,7 @@ Before you begin, ensure you have the following:
 
 ---
 
-### Step 4: S3 Buckets Configuration (`s3.tf`)
+### Step 4: S3 Buckets Configuration
 
 **Purpose**:
 - Host static website content and store logs.
@@ -159,7 +159,7 @@ Before you begin, ensure you have the following:
 
 ---
 
-### Step 5: IAM Roles and Policies (`iam.tf`)
+### Step 5: IAM Roles and Policies
 
 **Purpose**:
 - Define roles and permissions for resource access.
@@ -192,7 +192,7 @@ Before you begin, ensure you have the following:
 
 ---
 
-### Step 6: Cloudtrail Configuration (`cloudtrail.tf`)
+### Step 6: CloudTrail Configuration
 
 **Purpose**:
 - Log all API activity across AWS services.
@@ -213,7 +213,7 @@ Before you begin, ensure you have the following:
 
 ---
 
-### Step 7: GuardDuty Configuration (`guardduty.tf`)
+### Step 7: GuardDuty Configuration
 
 **Purpose**:
 - Enable threat detection across AWS accounts.
@@ -230,7 +230,7 @@ Before you begin, ensure you have the following:
 
 ---
 
-### Step 8: CloudWatch and EventBridge Configuration (`cloudwatch.tf`)
+### Step 8: CloudWatch and EventBridge Configuration
 
 **Purpose**:
 - Monitor security-related events and route them to appropriate destinations for alerting.
@@ -258,7 +258,7 @@ Before you begin, ensure you have the following:
 
 ---
 
-### Step 9: SNS Security Alerts (`sns.tf`)
+### Step 9: SNS Security Alerts
 
 **Purpose**:
 - Set up real-time security alerts to notify administrators of suspicious activity.
@@ -286,7 +286,7 @@ Before you begin, ensure you have the following:
 
 ---
 
-### Step 10: Python Automation Script (`upload_files.py`)
+### Step 10: Python Automation Script
 
 **Purpose**:
 - Automate the upload of static website content to the S3 bucket, ensuring correct metadata and permissions.
@@ -306,7 +306,7 @@ Before you begin, ensure you have the following:
 
 ---
 
-### Step 11: GitHub Actions Workflow (`deploy.yml`)
+### Step 11: GitHub Actions Workflow
 
 **Purpose**:
 - Automate website updates on code push.
@@ -326,6 +326,7 @@ Before you begin, ensure you have the following:
 ## Testing and Validation
 
 ### Test 1: Static Website Access
+
 **Test Objective**: 
 - Confirm that the static website is publicly accessible.
 
@@ -340,7 +341,8 @@ Before you begin, ensure you have the following:
 
 ---
 
-### Test 2: IAM Role Assumption & Permissions
+### Test 2: IAM Role Assumption and Permissions
+
 **Test Objective**: 
 - Ensure that IAM roles can be assumed securely and that permissions are tightly scoped using least privilege.
 
@@ -382,7 +384,8 @@ Before you begin, ensure you have the following:
 
 ---
 
-### Test 3: SNS Security Alerts
+### Test 3: SNS Alerting
+
 **Test Objective**: 
 - Validate that high-severity GuardDuty findings and specified CloudTrail events (e.g., high-risk IAM actions) trigger SNS notifications via EventBridge.
 
