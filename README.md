@@ -118,7 +118,6 @@ Before you begin, ensure you have the following:
 - Centralize and manage configuration values across your Terraform modules.
 
 **Security Measures**:
-- Keeps secrets (e.g., email addresses) in a single location for easier management and review.
 - Avoids hardcoding sensitive or environment-specific values directly in resource blocks.
 - Simplifies reuse and promotes DRY (Don’t Repeat Yourself) principles.
 
