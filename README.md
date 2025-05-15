@@ -1,5 +1,5 @@
 # Deploying a Static Website on AWS
-In this project I deploy and secure a static website hosted on Amazon S3 using Infrastructure as Code (Terraform) and Python scripting for automation. 
+In this project I host a secure static website on Amazon S3, with tightly scoped IAM roles, automated deployment, and comprehensive monitoring and alerting.
 
 ---
 
@@ -407,7 +407,7 @@ Before you begin, ensure you have the following:
 
 ## Conclusion
 
-In this project, a static website was securely deployed on AWS using Terraform and Python while following security best practices. By combining infrastructure as code, role-based access control, automated deployments, and real-time monitoring, it provides a robust and scalable foundation suitable for production or learning environments.
+In this project, a static website was securely deployed on AWS while following security best practices. By combining infrastructure as code, role-based access control, automated deployments, and real-time monitoring, it provides a robust and scalable foundation suitable for production or learning environments.
 
 Key takeaways include:
 
