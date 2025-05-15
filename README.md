@@ -54,7 +54,7 @@ Before you begin, ensure you have the following:
     - [Step 8: CloudWatch and EventBridge Configuration](#step-8-cloudwatch-and-eventbridge-configuration)
     - [Step 9: SNS Security Alerts](#step-9-sns-security-alerts)
     - [Step 10: Python Automation Script](#step-10-python-automation-script)
-    - [Step 11: GitHub Actions Workflow](#step-11-configure-github-actions-cicd)
+    - [Step 11: GitHub Actions Workflow](#step-11-github-actions-workflow)
 2. [Testing and Validation](#testing-and-validation)
    - [Test 1: Static Website Access](#test-1-static-website-access)
    - [Test 2: IAM Role Assumption and Permissions](#test-2-iam-role-assumption-and-permissions)
