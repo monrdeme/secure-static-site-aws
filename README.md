@@ -56,16 +56,16 @@ Before you begin, ensure you have the following:
     - [Step 10: Python Automation Script](#step-10-python-automation-script)
     - [Step 11: GitHub Actions Workflow](#step-11-github-actions-workflow)
 2. [Testing and Validation](#testing-and-validation)
-   - [Test 1: Static Website Access](#test-1-static-website-access)
-   - [Test 2: IAM Role Assumption and Permissions](#test-2-iam-role-assumption-and-permissions)
-   - [Test 3: SNS Alerting](#test-3-sns-alerting)
-8. [Conclusion](#conclusion)
+    - [Test 1: Static Website Access](#test-1-static-website-access)
+    - [Test 2: IAM Role Assumption and Permissions](#test-2-iam-role-assumption-and-permissions)
+    - [Test 3: SNS Alerting](#test-3-sns-alerting)
+3. [Conclusion](#conclusion)
 
 ---
 
 ## Deployment Workflow
 
-### Step 1: Static Website Files (`website/`)
+### Step 1: Static Website Files
 
 **Purpose**:
 - Provide the public-facing content for the static website hosted on S3.
@@ -83,7 +83,7 @@ Before you begin, ensure you have the following:
  
 ---
 
-### Step 2: Backend Configuration (`backend.tf`)
+### Step 2: Backend Configuration
 
 **Purpose**: 
 - Securely store Terraform state files for safe and collaborative infrastructure deployments.
@@ -112,7 +112,7 @@ Before you begin, ensure you have the following:
 
 ---
 
-### Step 3: Terraform Variables (`variables.tf`)
+### Step 3: Terraform Variables
 
 **Purpose**:
 - Centralize and manage configuration values across your Terraform modules.
