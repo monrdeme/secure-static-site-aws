@@ -1,4 +1,4 @@
-# Secure Static Website on AWS with Terraform and Python
+# Deploying a Static Website on AWS
 In this project I deploy and secure a static website hosted on Amazon S3 using Infrastructure as Code (Terraform) and Python scripting for automation. The goal is to follow AWS security best practices around permissions, monitoring, and alerting, while keeping it accessible and scalable.
 
 ---
@@ -220,7 +220,6 @@ Before you begin, ensure you have the following:
 - Integrated with Cloudwatch and EventBridge to forward high-severity findings to SNS.
 - Centralized alerting for suspicious behavior (e.g., anomalous API calls, port scanning).
 
-**GuardDuty**:
 <img width="1212" alt="image" src="https://i.postimg.cc/gJVwr95V/image.png">
 
 [guardduty.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/guardduty.tf)
@@ -248,7 +247,7 @@ Before you begin, ensure you have the following:
 **CloudWatch Logs Group for CloudTrail**:
 <img width="1212" alt="image" src="https://i.postimg.cc/MKvZXMn6/image.png">
 
-**EventBridge rules**:
+**EventBridge Rules**:
 <img width="1212" alt="image" src="https://i.postimg.cc/wvZmzW8J/image.png">
 
 [cloudwatch.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/cloudwatch.tf)
@@ -327,7 +326,6 @@ Before you begin, ensure you have the following:
 **Validation Steps**:
 - Accessed the static website via the S3 website endpoint.
 
-**Access to `index.html` Through the S3 Website Endpoint**.
 <img width="1212" alt="image" src="https://i.postimg.cc/Xq8GfxmB/image.png">
 
 
@@ -346,15 +344,17 @@ Before you begin, ensure you have the following:
 - Attempted disallowed actions (e.g., read with write-only role) and confirmed access was denied.
 
 **Admin Role**:
-- Assume Role (Allow):
+
+**Assume Role (Allow)**:
 <img width="1212" alt="image" src="https://i.postimg.cc/26rKgHcS/image.png">
 
-- List All Buckets (Allow):
+**List All Buckets (Allow)**:
 <img width="1212" alt="image" src="https://i.postimg.cc/tTXdt8Jp/image.png">
 
 ---
 
 **Write-Only Role**:
+
 **Assume Role (Allow)**:
 <img width="1212" alt="image" src="https://i.postimg.cc/yNmLsFtp/image.png">
 
@@ -367,6 +367,7 @@ Before you begin, ensure you have the following:
 ---
 
 **Read-Only Role**:
+
 **Assume Role (Allow)**:
 <img width="1212" alt="image" src="https://i.postimg.cc/6q9T2NHx/image.png">
 
@@ -389,17 +390,15 @@ Before you begin, ensure you have the following:
     - Verified that EventBridge detected the finding and triggered the associated SNS topic.
     - Received the alert email successfully.
  
-**SNS Email Alert Received After a GuardDuty Finding was Detected**:
 <img width="1212" alt="image" src="https://i.postimg.cc/pLJMgV4t/image.png">
 
-<img width="1212" alt="image" src="https://i.postimg.cc/6QRKYLKY/image.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/6pYP5Nn7/image.png">
 
-- CloudTrail-Based Alerts:
+- CloudTrail Alerts:
     - Performed a monitored CloudTrail event (e.g., `DeleteBucket`, `PutBucketPolicy`, or `CreateUser`).
     - Confirmed that EventBridge matched the event pattern and invoked the SNS topic.
     - Received the notification email.
 
-**SNS alert triggered by a high-risk CloudTrail event such as `CreateUser`**:
 <img width="1212" alt="image" src="https://i.postimg.cc/g0N664GJ/image.png">
 
 <img width="1212" alt="image" src="https://i.postimg.cc/tgsHht6k/image.png">
@@ -408,7 +407,7 @@ Before you begin, ensure you have the following:
 
 ## Conclusion
 
-In this project, a static website was securely deployed on AWS using Terraform and Python while following cloud security best practices. By combining infrastructure as code, role-based access control, automated deployments, and real-time monitoring, it provides a robust and scalable foundation suitable for production or learning environments.
+In this project, a static website was securely deployed on AWS using Terraform and Python while following security best practices. By combining infrastructure as code, role-based access control, automated deployments, and real-time monitoring, it provides a robust and scalable foundation suitable for production or learning environments.
 
 Key takeaways include:
 
