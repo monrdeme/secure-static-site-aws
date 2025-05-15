@@ -272,7 +272,7 @@ Before you begin, ensure you have the following:
     - Corresponds to the CloudTrail and GuardDuty EventBridge rules.
     - SNS topic policies limit publishing to EventBridge and restrict subscription management.
 
-<img width="1212" alt="image" src="https://i.postimg.cc/c15XGHPy/image.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/3RHgDnss/image.png">
 
 <img width="1212" alt="image" src="https://i.postimg.cc/RFwd7QXc/image.png">
 
