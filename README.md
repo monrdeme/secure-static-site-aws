@@ -1,5 +1,5 @@
 # Secure Static Website on AWS with Terraform and Python
-This project demonstrates how to deploy and secure a static website hosted on Amazon S3 using Infrastructure as Code (Terraform) and Python scripting for automation. The goal is to follow AWS security best practices around permissions, monitoring, and alerting, while keeping it accessible and scalable.
+In this project I deploy and secure a static website hosted on Amazon S3 using Infrastructure as Code (Terraform) and Python scripting for automation. The goal is to follow AWS security best practices around permissions, monitoring, and alerting, while keeping it accessible and scalable.
 
 ---
 
@@ -17,7 +17,7 @@ This project demonstrates how to deploy and secure a static website hosted on Am
 - **AWS IAM** – Secure role-based access control with least-privilege permissions to resources
 - **AWS CloudTrail** – Log and monitor API activity
 - **Amazon GuardDuty** – Threat detection and continuous security monitoring
-- **Amazon EventBridge** – Trigger actions based on CloudTrail and GuardDuty findings
+- **Amazon EventBridge** – Trigger actions based on CloudTrail events and GuardDuty findings
 - **Amazon CloudWatch** – Underlying log and event visibility
 - **Amazon SNS** – Email notifications for security alerts
 - **Amazon DynamoDB** – Store Terraform state locks for safe collaboration
@@ -55,7 +55,7 @@ Before you begin, ensure you have the following:
     - [Step 9: SNS Security Alerts](#step-9-sns-security-alerts)
     - [Step 10: Python Automation Script](#step-10-python-automation-script)
     - [Step 11: GitHub Actions Workflow](#step-11-configure-github-actions-cicd)
-2. [Project Testing & Validation](#project-testing-&-validation)
+2. [Testing and Validation](#testing-and-validation)
    - [Test 1: Static Website Access](#test1-static-website-access)
    - [Test 2: IAM Role Assumption and Permissions](#test2-iam-role-assumption-and-permissions)
    - [Test 3: SNS Alerting](#test3-sns-alerting)
@@ -323,7 +323,7 @@ Before you begin, ensure you have the following:
 
 ---
 
-## Project Testing & Validation
+## Testing and Validation
 
 ### Test 1: Static Website Access
 **Test Objective**: 
@@ -411,11 +411,11 @@ Before you begin, ensure you have the following:
 
 ## Conclusion
 
-This project demonstrates how to securely deploy a static website on AWS using Terraform and Python while following cloud security best practices. By combining infrastructure as code, role-based access control, automated deployments, and real-time monitoring, it provides a robust and scalable foundation suitable for production or learning environments.
+In this project, a static website was securely deployed on AWS using Terraform and Python while following cloud security best practices. By combining infrastructure as code, role-based access control, automated deployments, and real-time monitoring, it provides a robust and scalable foundation suitable for production or learning environments.
 
 Key takeaways include:
 
 - Secure S3 configuration for public static content with minimal access exposure.
 - IAM roles designed around least privilege and role assumption for better auditability.
-- End-to-end monitoring and alerting through CloudTrail, GuardDuty, EventBridge, and SNS.
+- End-to-end monitoring and alerting through CloudTrail, GuardDuty, CloudWatch, EventBridge, and SNS.
 - Automation with Python and GitHub Actions to streamline operations and ensure consistent deployments.
