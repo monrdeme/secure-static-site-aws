@@ -3,9 +3,7 @@ In this project I host a secure static website on Amazon S3, with tightly scoped
 
 ---
 
-## Architecture
-
-![Architecture Diagram](./assets/architecture.png) <!-- Replace with actual path or hosted link -->
+![Architecture Diagram](architecture-diagram.png) 
 
 ---
 
