@@ -30,11 +30,11 @@ Before you begin, ensure you have the following:
 
 - **AWS Account** with administrative access
 - **Verified Email Address** in AWS (for SNS subscriptions)
-- **Terraform installed** (v1.3+ recommended)
+- **Terraform Installed** (v1.3+ recommended)
 - **Python 3.8+** with `boto3` installed
-- **Git installed**
+- **Git Installed**
 - **GitHub Repository** set up and linked locally
-- **AWS CLI configured** locally (`aws configure`)
+- **AWS CLI Configured** locally (`aws configure`)
 - **IAM User/Role** with necessary permissions to provision AWS resources and upload to S3
 
 ---
