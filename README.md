@@ -230,9 +230,9 @@ Before you begin, ensure you have the following:
 - Monitor security-related events and route them to appropriate destinations for alerting.
 
 **Security Measures**:
-- Created CloudWatch Log Groups to collect relevant logs.
-- Configured EventBridge rules to match high-severity GuardDuty findings and sensitive CloudTrail activity.
-- Integrated SNS as a target to ensure alerts are sent in real-time.
+- Created CloudWatch Log Group to collect CloudTrail logs.
+- Configured EventBridge rules to match high-severity GuardDuty findings and sensitive CloudTrail events.
+- Integrated SNS as a target to ensure real-time alerting
 - Ensured only necessary principals can create or modify EventBridge rules and targets.
 
 **Implementation Details**:
