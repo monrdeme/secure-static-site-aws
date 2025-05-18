@@ -356,11 +356,11 @@ Before you begin, ensure you have the following:
 **Assume Role (Allow)**:
 <img width="1212" alt="image" src="https://i.postimg.cc/yNmLsFtp/image.png">
 
-**Write File to Website Bucket (Allow)**:
-<img width="1212" alt="image" src="https://i.postimg.cc/hvkHb4g5/image.png">
+**Upload File to Website Bucket (Allow)**:
+<img width="1212" alt="image" src="https://i.postimg.cc/FHR9JVnk/image.png">
 
 **Read File (Deny)**:
-<img width="1212" alt="image" src="https://i.postimg.cc/LsSvkYPP/image.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/nhVjz7JC/image.png">
 
 ---
 
@@ -372,8 +372,8 @@ Before you begin, ensure you have the following:
 **Read File in Website Bucket (Allow)**:
 <img width="1212" alt="image" src="https://i.postimg.cc/C5xCKX2r/image.png">
 
-**Write File (Deny)**:
-<img width="1212" alt="image" src="https://i.postimg.cc/vBN7c3dQ/image.png">
+**Upload File (Deny)**:
+<img width="1212" alt="image" src="https://i.postimg.cc/QMnzFpKm/image.png">
 
 ---
 
@@ -388,9 +388,9 @@ Before you begin, ensure you have the following:
     - Verified that EventBridge detected the finding and triggered the associated SNS topic.
     - Received the alert email successfully.
  
-<img width="1212" alt="image" src="https://i.postimg.cc/pLJMgV4t/image.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/tCTqW3B6/image.png">
 
-<img width="1212" alt="image" src="https://i.postimg.cc/6pYP5Nn7/image.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/TwSrXVYW/image.png">
 
 - CloudTrail Alerts:
     - Performed a monitored CloudTrail event (e.g., `DeleteBucket`, `PutBucketPolicy`, or `CreateUser`).
@@ -399,7 +399,7 @@ Before you begin, ensure you have the following:
 
 <img width="1212" alt="image" src="https://i.postimg.cc/g0N664GJ/image.png">
 
-<img width="1212" alt="image" src="https://i.postimg.cc/tgsHht6k/image.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/C56Wj6N6/image.png">
 
 ---
 
