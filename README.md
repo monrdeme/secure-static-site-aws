@@ -324,7 +324,7 @@ Before you begin, ensure you have the following:
 **Validation Steps**:
 - Accessed the static website via the S3 website endpoint.
 
-<img width="1212" alt="image" src="https://i.postimg.cc/Xq8GfxmB/image.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/9QfnmRRp/image.png">
 
 
 <img width="1212" alt="image" src="https://i.postimg.cc/QCc81qYG/image.png">
