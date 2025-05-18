@@ -133,7 +133,7 @@ Before you begin, ensure you have the following:
 ### Step 4: S3 Buckets Configuration
 
 **Purpose**:
-- Host static website content and store logs.
+- Host static website content and store CloudTrail logs.
 
 **Security Measures**:
 - Enabled versioning and server-side encryption on all buckets.
