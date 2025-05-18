@@ -181,7 +181,7 @@ Before you begin, ensure you have the following:
 <img width="1212" alt="image" src="https://i.postimg.cc/jSM54WFF/image.png">
 
 **IAM Policies**:
-<img width="1212" alt="image" src="https://i.imgur.com/Cd529TA.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/J0zQpRK7/image.png">
 
 [iam.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/iam.tf)
 
