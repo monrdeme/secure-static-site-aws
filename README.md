@@ -405,7 +405,7 @@ Before you begin, ensure you have the following:
 
 ## Conclusion
 
-In this project, a static website was securely deployed on AWS while following security best practices. By combining infrastructure as code, role-based access control, automated deployments, and real-time monitoring, it provides a robust and scalable foundation suitable for production or learning environments.
+In this project, a static website was securely deployed on AWS while following security best practices. By combining infrastructure as code, role-based access control, automated deployments, and real-time monitoring, it provides a robust and scalable foundation suitable for production or development environments.
 
 Key takeaways include:
 
