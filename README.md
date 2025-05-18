@@ -215,7 +215,7 @@ Before you begin, ensure you have the following:
 
 **Security Measures**:
 - Activated GuardDuty with all available detectors.
-- Integrated with Cloudwatch and EventBridge to forward high-severity findings to SNS.
+- Integrated with EventBridge to forward high-severity findings to SNS.
 - Centralized alerting for suspicious behavior (e.g., anomalous API calls, port scanning).
 
 <img width="1212" alt="image" src="https://i.postimg.cc/gJVwr95V/image.png">
