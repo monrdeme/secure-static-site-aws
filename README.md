@@ -175,7 +175,7 @@ Before you begin, ensure you have the following:
 - **Read-Only Role**:
     - Read-only access to the website content bucket.
     - Granted only `s3:GetObject` on specific paths.
-    - Intended for webiste content consumers
+    - Intended for website content consumers
 
 **IAM Roles**:
 <img width="1212" alt="image" src="https://i.postimg.cc/jSM54WFF/image.png">
