@@ -3,7 +3,7 @@ In this project I host a secure static website on Amazon S3, with tightly scoped
 
 ---
 
-![Architecture Diagram](architecture-diagram.png) 
+![Architecture Diagram](https://i.postimg.cc/MT6cW7Zp/image.png) 
 
 ---
 
