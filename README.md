@@ -104,7 +104,7 @@ Before you begin, ensure you have the following:
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/977d3916-1ef8-4b31-bec6-0bd9a3bf7b1d">
 
 **DynamoDB Table**:
-<img width="1212" alt="image" src="https://i.imgur.com/EtP74v2.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/fWqQxnLh/2025-07-27-06-33-32-List-tables-Amazon-Dynamo-DB-Management-Console-Dynamo-DB-us-east-1.png">
 
 [backend.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/backend.tf)
 
