@@ -100,10 +100,12 @@ Before you begin, ensure you have the following:
         - With partition key: LockID (type: String)
 - Once created, reference these in your backend.tf before running terraform init.
 
-**Terraform State File Bucket**:
+**Terraform State File Bucket**
+
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/977d3916-1ef8-4b31-bec6-0bd9a3bf7b1d">
 
-**DynamoDB Table**:
+**DynamoDB Table**
+
 <img width="1212" alt="image" src="https://i.postimg.cc/fWqQxnLh/2025-07-27-06-33-32-List-tables-Amazon-Dynamo-DB-Management-Console-Dynamo-DB-us-east-1.png">
 
 [backend.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/backend.tf)
@@ -149,7 +151,8 @@ Before you begin, ensure you have the following:
     - Dedicated for CloudTrail logs.
     - Public access completely blocked.
 
-**Website and Logging Buckets**:
+**Website and Logging Buckets**
+
 <img width="1212" alt="image" src="https://i.imgur.com/DuYdKYf.png">
 
 [s3.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/s3.tf)
@@ -177,10 +180,12 @@ Before you begin, ensure you have the following:
     - Granted only `s3:GetObject` on specific paths.
     - Intended for website content consumers
 
-**IAM Roles**:
+**IAM Roles**
+
 <img width="1212" alt="image" src="https://i.postimg.cc/jSM54WFF/image.png">
 
-**IAM Policies**:
+**IAM Policies**
+
 <img width="1212" alt="image" src="https://i.postimg.cc/J0zQpRK7/image.png">
 
 [iam.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/iam.tf)
@@ -201,7 +206,8 @@ Before you begin, ensure you have the following:
 - Single CloudTrail trail covering all regions.
 - CloudTrail logs stored in the `secure-static-site-aws-logging` bucket.
 
-**CloudTrail Trail**:
+**CloudTrail Trail**
+
 <img width="1212" alt="image" src="https://i.postimg.cc/SNxZR3cb/image.png">
 
 [cloudtrail.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/cloudtrail.tf)
@@ -242,10 +248,12 @@ Before you begin, ensure you have the following:
 - Rules forward matched events to SNS topic for email notifications.
 - CloudWatch Log Group created for long-term centralized storage and future metric filtering.
 
-**CloudWatch Logs Group for CloudTrail**:
+**CloudWatch Logs Group for CloudTrail**
+
 <img width="1212" alt="image" src="https://i.postimg.cc/MKvZXMn6/image.png">
 
-**EventBridge Rules**:
+**EventBridge Rules**
+
 <img width="1212" alt="image" src="https://i.postimg.cc/wvZmzW8J/image.png">
 
 [cloudwatch.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/cloudwatch.tf)
@@ -343,36 +351,44 @@ Before you begin, ensure you have the following:
 
 **Admin Role**:
 
-**Assume Role (Allow)**:
+**Assume Role (Allow)**
+
 <img width="1212" alt="image" src="https://i.postimg.cc/26rKgHcS/image.png">
 
-**List All Buckets (Allow)**:
+**List All Buckets (Allow)**
+
 <img width="1212" alt="image" src="https://i.postimg.cc/tTXdt8Jp/image.png">
 
 ---
 
 **Write-Only Role**:
 
-**Assume Role (Allow)**:
+**Assume Role (Allow)**
+
 <img width="1212" alt="image" src="https://i.postimg.cc/yNmLsFtp/image.png">
 
-**Upload File to Website Bucket (Allow)**:
+**Upload File to Website Bucket (Allow)**
+
 <img width="1212" alt="image" src="https://i.postimg.cc/FHR9JVnk/image.png">
 
-**Read File (Deny)**:
+**Read File (Deny)**
+
 <img width="1212" alt="image" src="https://i.postimg.cc/nhVjz7JC/image.png">
 
 ---
 
 **Read-Only Role**:
 
-**Assume Role (Allow)**:
+**Assume Role (Allow)**
+
 <img width="1212" alt="image" src="https://i.postimg.cc/6q9T2NHx/image.png">
 
-**Read File in Website Bucket (Allow)**:
+**Read File in Website Bucket (Allow)**
+
 <img width="1212" alt="image" src="https://i.postimg.cc/C5xCKX2r/image.png">
 
-**Upload File (Deny)**:
+**Upload File (Deny)**
+
 <img width="1212" alt="image" src="https://i.postimg.cc/QMnzFpKm/image.png">
 
 ---
