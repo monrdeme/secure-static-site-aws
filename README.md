@@ -153,7 +153,7 @@ Before you begin, ensure you have the following:
 
 **Website and Logging Buckets**
 
-<img width="1212" alt="image" src="https://i.imgur.com/DuYdKYf.png">
+<img width="1212" alt="image" src="https://i.postimg.cc/52bRQsVC/2025-07-27-06-53-58-S3-buckets-S3-us-east-1.png">
 
 [s3.tf](https://github.com/monrdeme/secure-static-site-aws/blob/main/terraform/s3.tf)
 
