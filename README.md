@@ -1,4 +1,4 @@
-# Hosting a Static Website in an AWS S3 Bucket
+# Hosting a Secure Static Website on Amazon S3
 In this project I host a secure static website on Amazon S3 using Terraform and Python. I configure least-privilege IAM roles, enable GuardDuty and CloudTrail for security monitoring, and automate deployment with GitHub Actions. EventBridge and SNS are integrated to send real-time email alerts on suspicious activity.
 
 ---
